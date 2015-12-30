@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+
+	<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
+
+	<style>
+
+	</style>
+</head>
+<body>
+	<h1>{{user.first_name}}'s Page</h1>
+	<br>
+	<!-- <h2>Create a Wishlist</h2> -->
+
+	<form action="{% url 'WishListApp:add_wishlist' user.id %}" method="post">
+	<fieldset>
+		<legend>Create a Wishlist:</legend>
+		{% csrf_token %}
+		Name:<br>
+		<input type="text" name="name"> 
+		<br><br>
+		<input type="submit" value="submit">
+	</fieldset>
+	</form>
+
+</body>
+
+</html>

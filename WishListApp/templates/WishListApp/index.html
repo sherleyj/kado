@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+
+	<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+	<div class="header-text">
+		<ul>
+			<li>
+				<a href="{% url 'WishListApp:about' %}">about</a>
+			</li>
+			<li>
+				<a href="{% url 'WishListApp:login' %}">sign up/log in</a>
+			</li>
+		</ul>
+	</div>
+
+	
+	<div class="title">
+		<h1>K A D O<h1>
+	</div>
+
+	<div class="gift-image">
+		<img src="{% static 'WishListApp/images/present-icon.png' %}"/>
+	</div>
+
+</body>
+</html>

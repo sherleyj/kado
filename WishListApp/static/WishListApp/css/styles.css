@@ -1,0 +1,47 @@
+	html{
+		color:#fff;
+		font-family: 'Julius Sans One', sans-serif;
+	}
+	body{
+		background-color: #000;
+	}
+
+	.menu-container{
+
+	}
+
+	.menu{
+
+	}
+
+
+	.header-text{
+		text-align: right;
+		padding-top: 20px;
+		padding-right: 50px;
+	}
+
+	.header-text ul li{
+		display: inline;
+	}
+
+	.header-text ul li a{
+		color:#FFF;
+		font-size: 1.3em;
+		text-decoration: none;
+		padding: .2em 1em;
+	}
+
+	.title{
+		font-family: 'Megrim', cursive;
+		text-align: center;
+		color: #FFF;
+		font-size: 4em;
+	}
+
+	.gift-image{
+		margin-left: auto;
+		margin-right: auto;
+		width: 512px;
+	}
+
