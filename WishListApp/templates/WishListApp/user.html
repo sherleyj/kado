@@ -27,6 +27,16 @@
 		<input type="submit" value="submit">
 	</fieldset>
 	</form>
+	<br>
+	<fieldset>
+		<legend>My Wish Lists</legend>
+		<ul>
+		{% for wishlist in wishlists %}
+			<li><a href="{% url 'WishListApp:wishlist' user.id wishlist.id %}">{{wishlist.name}}</a></li>
+		{% endfor %}
+		</ul>
+	</fieldset>
+
 
 </body>
 

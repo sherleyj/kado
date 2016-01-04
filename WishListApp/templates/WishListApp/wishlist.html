@@ -14,6 +14,29 @@
 </head>
 <body>
 	<h1>{{user.first_name}}'s {{wishlist.name}} Wish List </h1>
+
+	<form action="{% url 'WishListApp:additem' user.id wishlist.id %}" method="post">
+	<fieldset>
+		<legend>Add an item to your wish list</legend>
+		{% csrf_token %}
+		name:<br>
+		<input type="text" name="name">
+		<br>
+		url:<br>
+		<input type="url" name="url">
+		<br><br>
+		<input type="submit" name="submit"> 
+	</fieldset>
+	</form>
+	<br>
+	<fieldset>
+		<legend>Items</legend>
+		<ul>
+		{% for item in wishlist_items %}
+			<li><a href="{{item.url}}">{{item.name}}</a></li>
+		{% endfor %}
+		</ul>
+	</fieldset>
 </body>
 
 </html>
