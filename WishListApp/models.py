@@ -18,6 +18,7 @@ class KadoUser(models.Model):
 class WishList(models.Model):
 	user = models.ForeignKey(User)
 	name = models.CharField(max_length=200)
+	# email, mailing address, phone number,
 
 	def __str__(self):
 		return self.name

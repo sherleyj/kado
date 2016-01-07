@@ -4,32 +4,57 @@
 <head>
 	<link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
 
-	<link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+<!-- 	<link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'> -->
+
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 
 	<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
 
 </head>
 <body>
 
+	<div class="menu-container">
+	<div class="menu">
+	<nav id="primary_nav_wrap">
+	<ul>
+	  <li><a href="#">Menu</a>
+	    <ul>
+	    	<li class="disabled">&nbsp;</li>
+	      <li><a href="#">About Kado</a></li>
+	      <li><a href="{% url 'WishListApp:about' %}">How It Works</a></li>
+	      <li><a href="#">Send a Kado</a></li>
+	      <!-- <li class="disabled">&nbsp;</li> -->
+	      <li><a href="#">Our Blog</a></li>
+	      <li><a href="#">Contact Us</a></li>
+	    </ul>
+	  </li>
+	  <!-- <li><a href="{% url 'WishListApp:login' %}">sign up</a></li>
+	  <li><a href="{% url 'WishListApp:login' %}">log in</a></li> -->
+	</ul>
+	</nav>
+
 	<div class="header-text">
 		<ul>
 			<li>
-				<a href="{% url 'WishListApp:about' %}">about</a>
+				<a href="{% url 'WishListApp:login' %}">Sign Up</a>
 			</li>
 			<li>
-				<a href="{% url 'WishListApp:login' %}">sign up/log in</a>
+				<a href="{% url 'WishListApp:login' %}">Log In</a>
 			</li>
 		</ul>
 	</div>
-
+	</div>
+	</div>
 	
 	<div class="title">
 		<h1>K A D O<h1>
 	</div>
 
-	<div class="gift-image">
-		<img src="{% static 'WishListApp/images/present-icon.png' %}"/>
+	<div class="gift-image-container">
+		<div class="gift-image"><img src="{% static 'WishListApp/images/present-icon.png' %}"/></div>
 	</div>
+
+	How <div class="kado-A">A</div> Works
 
 </body>
 </html>

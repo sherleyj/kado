@@ -1,13 +1,24 @@
 	html{
-		color:#fff;
-		font-family: 'Julius Sans One', sans-serif;
+		color:#000;
+		font-family: 'Lato', sans-serif;
+		font-weight: 300;
+		margin: 0;
+		padding: 0;
 	}
 	body{
-		background-color: #000;
+		background-color: #FFF;
+		margin: 0;
+		padding: 0;
 	}
 
 	.menu-container{
-
+		width: 100%;
+		/*margin-top: -5px;*/
+		position: fixed;
+		background-color: #FFF;
+		opacity: .65;
+		border-bottom: 2px solid #D1D1D1;
+		height: 50px;
 	}
 
 	.menu{
@@ -17,7 +28,6 @@
 
 	.header-text{
 		text-align: right;
-		padding-top: 20px;
 		padding-right: 50px;
 	}
 
@@ -26,22 +36,127 @@
 	}
 
 	.header-text ul li a{
-		color:#FFF;
-		font-size: 1.3em;
+		font-size: 15px;
 		text-decoration: none;
 		padding: .2em 1em;
+		color:#000;
+		font-weight: 700;
+	}
+
+	#primary_nav_wrap
+	{
+		/*margin-top:15px;*/
+		/*width: ;*/
+	}
+
+	#primary_nav_wrap ul
+	{
+		list-style: none;
+		position: relative;
+		float: left;
+		margin: 0;
+		padding: 0;
+		font-size: 15px;
+		font-weight: 700;
+	}
+
+	#primary_nav_wrap ul a
+	{
+		display: block;
+		color: #333;
+		text-decoration: none;
+		line-height: 32px;
+		padding:10px 15px;
+		padding-top: 0;
+	}
+
+	#primary_nav_wrap ul li
+	{
+		position: relative;
+		/*font-size: 10px;*/
+		float:left;
+		margin: 0;
+		padding: 0;
+	}
+
+	#primary_nav_wrap ul li.current-menu-item
+	{
+		background:#ddd;
+	}
+
+	#primary_nav_wrap ul li:hover
+	{
+		background:#f6f6f6;
+	}
+
+	#primary_nav_wrap ul li.disabled, #primary_nav_wrap ul li.disabled:hover{
+    background:#FFF;
+    padding-bottom: 2px;
+	}
+
+	#primary_nav_wrap ul ul
+	{
+		display:none;
+		position:absolute;
+		top:100%;
+		left:0;
+		background:#fff;
+		font-size: 15px;
+		padding:0;
+	}
+
+	#primary_nav_wrap ul ul li
+	{
+		float:none;
+		width:200px;
+	}
+
+	#primary_nav_wrap ul ul a
+	{
+		line-height:120%;
+		padding:10px 15px;
+	}
+
+	#primary_nav_wrap ul ul ul
+	{
+		top:0;
+		left:100%;
+	}
+
+	#primary_nav_wrap ul li:hover > ul
+	{
+		display:block;
 	}
 
 	.title{
 		font-family: 'Megrim', cursive;
 		text-align: center;
-		color: #FFF;
 		font-size: 4em;
+		background-color: #000;
+		color: #fff;
+		width: 100%;
+		padding-top: 100px;
+		padding-bottom: 50px;
+	}
+	.title h1{
+		margin: 0;
+		/*padding: 0;*/
+	}
+
+	.gift-image-container{
+		background: #000;
+		width: 100%;
+		height: 220px;
 	}
 
 	.gift-image{
 		margin-left: auto;
 		margin-right: auto;
 		width: 512px;
+	}
+
+
+	.kado-A{
+		font-family: 'Megrim', cursive;
 	}
 
