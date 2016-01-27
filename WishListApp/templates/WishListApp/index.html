@@ -6,55 +6,129 @@
 
 <!-- 	<link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'> -->
 
-	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,100' rel='stylesheet' type='text/css'>
 
 	<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
+
+	<!-- not used -->
+	<link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,200,300' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
+	<!-- used -->
+	<link href='https://fonts.googleapis.com/css?family=Stint+Ultra+Condensed' rel='stylesheet' type='text/css'>
 
 </head>
 <body>
 
 	<div class="menu-container">
-	<div class="menu">
-	<nav id="primary_nav_wrap">
-	<ul>
-	  <li><a href="#">Menu</a>
-	    <ul>
-	    	<li class="disabled">&nbsp;</li>
-	      <li><a href="#">About Kado</a></li>
-	      <li><a href="{% url 'WishListApp:about' %}">How It Works</a></li>
-	      <li><a href="#">Send a Kado</a></li>
-	      <!-- <li class="disabled">&nbsp;</li> -->
-	      <li><a href="#">Our Blog</a></li>
-	      <li><a href="#">Contact Us</a></li>
-	    </ul>
-	  </li>
-	  <!-- <li><a href="{% url 'WishListApp:login' %}">sign up</a></li>
-	  <li><a href="{% url 'WishListApp:login' %}">log in</a></li> -->
-	</ul>
-	</nav>
+
+	<div class="menu-style"></div>
+
+	<div class="dropdown-container">
+		<div class="dropdown">
+  		<button class="dropbtn">MENU</button>
+ 	 		<div class="dropdown-content">
+    		<a href="{% url 'WishListApp:index' %}">HOME</a>
+    		<a href="{% url 'WishListApp:give' %}">GI<div class="kado-font">V</div>E</a>
+    		<a href="#">HOW <div class="kado-font">A</div> WORKS</a>
+    		<a href="#">ABOUT US</a>
+    		<a href="#">BLOG</a>
+    		<a href="#">CONTACT US</a>
+  		</div>
+		</div>
+	</div>
 
 	<div class="header-text">
 		<ul>
+<!-- 			<li>
+				<a href="{% url 'WishListApp:signup' %}">SIGN UP</a>
+			</li> -->
 			<li>
-				<a href="{% url 'WishListApp:login' %}">Sign Up</a>
+				Have an account?
 			</li>
 			<li>
-				<a href="{% url 'WishListApp:login' %}">Log In</a>
+				<a href="{% url 'WishListApp:login' %}">LOG IN</a>
 			</li>
 		</ul>
 	</div>
-	</div>
+
 	</div>
 	
-	<div class="title">
-		<h1>K A D O<h1>
+	<div class="title-wrapper">
+		<div class="title">
+			<h1>KADO</h1>
+
+			<div class="cta">
+
+				<div>
+					<h2>
+						GI<div class="kado-font">V</div>E GREAT.
+						<br/>
+						W<div class="kado-font">A</div>NT BETTER.
+						<br/>
+					</h2>
+					<br/>
+					Always get what you want and give what is wanted with a Kado wishlist.
+				</div>
+
+				<div class="signup-btn">
+				<a href="{% url 'WishListApp:signup' %}">SIGN UP</a>
+				<!-- <a href="{% url 'WishListApp:signup' %}">GI<div class="kado-font">V</div>E A GIFT</a>
+				</div> -->
+
+			</div>
+
+			<!-- <div>Don't know what gift to give someone?</div>
+			<div> <div class="kado-font">Kado</div> can help.</div> -->
+			<!-- <img src="{% static 'WishListApp/images/bow.png' %}"/> -->
+		</div>
+		<div class="title-overlay"></div>
+	</div>
+<!-- 	<div class="gift-image-container">
+		<div class="gift-image">
+		<img src="{% static 'WishListApp/images/present-icon.png' %}"/>
+		</div>
+	</div> -->
+
+	<div class="works-title">
+		HOW <div class="kado-A">A</div> WORKS
 	</div>
 
-	<div class="gift-image-container">
-		<div class="gift-image"><img src="{% static 'WishListApp/images/present-icon.png' %}"/></div>
+	<div class="works-container">
+		
+		<div class="works-panel">
+			<div class="works-num">
+				1
+			</div>
+			<span class="works-item">
+			Make an account where  you can W<div class="kado-font">A</div>NT items from around the web.
+			</span>
+		</div>
+
+		<div class="works-panel">
+			<div class="works-num">
+				2
+			</div>
+			<span class="works-item">
+			Friends, family, coworkers, ect. can access your W<div class="kado-font">A</div>NT list using your email or phone number.
+			</span>
+		</div>
+
+		<div class="works-panel">
+			<div class="works-num">
+				3
+			</div>
+			<span class="works-item">
+				If they choose to GI<div class="kado-font">V</div>E, we will package and deliver to you. Surprise!
+			</span>
+		</div>
+
 	</div>
 
-	How <div class="kado-A">A</div> Works
+	<div class="space"></div>
+
+	
 
 </body>
 </html>

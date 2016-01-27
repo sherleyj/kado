@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 class KadoUser(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	dob = models.DateField(blank=True)
+	dob = models.DateField(blank=True, null=True)
 	photo = models.URLField(blank=True)
 
 
@@ -17,7 +17,7 @@ class KadoUser(models.Model):
 
 class WishList(models.Model):
 	user = models.ForeignKey(User)
-	name = models.CharField(max_length=200)
+	name = models.CharField(max_length=200, blank=True)
 	# email, mailing address, phone number,
 
 	def __str__(self):

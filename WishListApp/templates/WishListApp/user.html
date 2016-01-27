@@ -13,11 +13,14 @@
 	</style>
 </head>
 <body>
-	<h1>{{user.first_name}}'s Page</h1>
+	<div class="user-header">
+		<h1>{{user.first_name}} {{user.last_name}}</h1>
+	</div>
+
 	<br>
 	<!-- <h2>Create a Wishlist</h2> -->
 
-	<form action="{% url 'WishListApp:add_wishlist' user.id %}" method="post">
+<!-- 	<form action="{% url 'WishListApp:add_wishlist' user.id %}" method="post">
 	<fieldset>
 		<legend>Create a Wishlist:</legend>
 		{% csrf_token %}
@@ -26,13 +29,21 @@
 		<br><br>
 		<input type="submit" value="submit">
 	</fieldset>
-	</form>
+	</form> -->
 	<br>
-	<fieldset>
-		<legend>My Wish Lists</legend>
+	<!-- <fieldset>
+		<legend>My Wish List</legend>
 		<ul>
 		{% for wishlist in wishlists %}
 			<li><a href="{% url 'WishListApp:wishlist' user.id wishlist.id %}">{{wishlist.name}}</a></li>
+		{% endfor %}
+		</ul>
+	</fieldset> -->
+	<fieldset>
+		<legend>Items</legend>
+		<ul>
+		{% for item in wishlist_items %}
+			<li><a href="{{item.url}}">{{item.name}}</a></li>
 		{% endfor %}
 		</ul>
 	</fieldset>

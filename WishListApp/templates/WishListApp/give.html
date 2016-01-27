@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+
+	<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
+
+<style>
+	html{
+		background-color: #FEFEFE;
+	}
+</style>
+
+</head>
+<body>
+	<div class="menu-container">
+
+	<div class="menu-style"></div>
+
+	<div class="dropdown-container">
+		<div class="dropdown">
+  		<button class="dropbtn">MENU</button>
+ 	 		<div class="dropdown-content">
+    		<a href="{% url 'WishListApp:index' %}">HOME</a>
+    		<a href="{% url 'WishListApp:give' %}">GI<div class="kado-font">V</div>E</a>
+    		<a href="#">HOW <div class="kado-font">A</div> WORKS</a>
+    		<a href="#">ABOUT US</a>
+    		<a href="#">BLOG</a>
+    		<a href="#">CONTACT US</a>
+  		</div>
+		</div>
+	</div>
+
+	<div class="header-text">
+		<ul>
+			<li>
+				<a href="{% url 'WishListApp:signup' %}">SIGN UP</a>
+			</li>
+			<li>
+				<a href="{% url 'WishListApp:login' %}">LOG IN</a>
+			</li>
+		</ul>
+	</div>
+
+	<div>
+		<!-- GI<div class="kado-font">V</div>E -->
+		<h1>GIVE</h1>
+	</div>
+	<div class="input-container">
+		<input type="text" name="give-search" value="Search by email or phone..." onfocus="if (this.value == 'Search by email or phone...') {this.value = '';}"
+		onblur="if (this.value == '') {this.value = 'Search by email or phone...';}">
+	</div>
+
+
+</body>
+</html>

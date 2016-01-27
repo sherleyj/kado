@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+
+	<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
+
+	<style>
+
+	</style>
+</head>
+<body>
+
+	<form action="{% url 'WishListApp:signup' %}" method="post">
+	<fieldset>
+		<legend>Sign Up</legend>
+		{% csrf_token %}
+		Username:<br>
+		<input type="text" name="username">
+		<br>
+		Password:<br>
+		<input type="password" name="psw">
+		<br>
+		Confirm Password:<br>
+		<input type="password" name="psw2">
+		<br>
+		First Name:<br>
+		<input type="text" name="first-name">
+		<br>
+		Last Name:<br>
+		<input type="text" name="last-name">
+		<br>
+		Email:<br>
+		<input type="text" name="email">
+		<br><br>
+		<input type="submit" name="submit">
+		<br><br>
+
+		{{error_message}}
+	
+	</fieldset>
+	</form>
+</body>
+
+</html>
