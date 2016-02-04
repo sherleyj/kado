@@ -11,9 +11,9 @@ urlpatterns = [
     url(r'^login/', views.login, name='login'),
     url(r'^signup/', views.signUp, name='signup'),
     url(r'^give/', views.give, name='give'),
-    url(r'^user/(?P<user_id>[0-9]+)/$', views.user, name='user'),
+    url(r'^user/(?P<user_id>[0-9]+)/(?P<wishlist_id>[0-9]+)$', views.user, name='user'),
     # url(r'^user/(?P<user_id>[0-9]+)/add-wish-list/$', views.addWishList, name='addWishList'),
     url(r'^user/(?P<user_id>[0-9]+)/add-wishlist/$', views.addWishList, name='add_wishlist'),
     url(r'^user/(?P<user_id>[0-9]+)/wishlist/(?P<wishlist_id>[0-9]+)$', views.wishList, name='wishlist'),
-    url(r'^user/(?P<user_id>[0-9]+)/wishlist/(?P<wishlist_id>[0-9]+)/add_item$', views.addItem, name="additem"),
+    url(r'^user/(?P<user_id>[0-9]+)/(?P<wishlist_id>[0-9]+)/add_item$', views.addItem, name="additem"),
 ]

@@ -17,15 +17,18 @@ def about(request):
 def give(request):
 	return render(request, 'WishListApp/give.html')
 
-def user(request, user_id):
+def user(request, user_id, wishlist_id, error_msg=""):
+	# must be loggen in to see user pages/wishlists
 	if not request.user.is_authenticated():
 		return render(request, 'WishListApp/login.html')
 	# if int(request.user.id) != int(user_id):
 	# 	return HttpResponse("You are user %s. You cannot access user %s's profile" % (request.user.id, user_id))
 		# return render(request, 'WishListApp/login.html')
 	user = get_object_or_404(User, pk=user_id)
-	wishlists = WishList.objects.filter(user=user).distinct()
-	return render(request, 'WishListApp/user.html',{'user':user, 'wishlists':wishlists})
+	wishlist = get_object_or_404(WishList, pk=wishlist_id)
+	#list of items in wish list
+	wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
+	return render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
 
 def login(request):
 	# return HttpResponse("Login here!")
@@ -38,10 +41,11 @@ def login(request):
 		if user is not None:
 			if user.is_active:
 				auth_login(request, user)
+				wishlist = WishList.objects.get(user=user, name='public-'+str(user.id))
 				# return HttpResponse(username)
-				return HttpResponseRedirect(reverse('WishListApp:user',args=(user.id,)))
+				return HttpResponseRedirect(reverse('WishListApp:user',args=(user.id,wishlist.id,)))
 			else:
-				return HttpResponse("User Not Active!")
+				return HttpResponse("User Not Active.")
 		else:
 			msg = "invalid login"
 	
@@ -69,12 +73,18 @@ def wishList(request, user_id, wishlist_id):
 
 def addItem(request, user_id, wishlist_id):
 	user = get_object_or_404(User, pk=user_id)
-	wish_list = get_object_or_404(WishList, pk=wishlist_id)
+	wishlist = get_object_or_404(WishList, pk=wishlist_id)
 	try:
-		new_wishlist_item = WishListItem.objects.create(name=request.POST['name'], url=request.POST['url'], wish_list=wish_list)
-	except:
-		return render(request, 'WishListApp/wishlist.html', {'user':user, 'wishlist':wish_list, 'error_message':"Error: item not added to wishlist."})
-	return HttpResponseRedirect(reverse('WishListApp:wishlist', args=(user_id, wishlist_id)))
+		new_wishlist_item = WishListItem.objects.create(name=request.POST['name'], url=request.POST['url'], image=request.POST['image'], wish_list=wishlist)
+		wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
+	except Exception, e:
+		wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
+		error_msg = "Failed to add item. "
+		return render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg + str(e)})
+		# return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
+	return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
+	# render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': ""})
+	# return HttpResponse("Added Item")
 
 def signUp(request):
 	username = request.POST.get('username')
@@ -99,12 +109,12 @@ def signUp(request):
 			new_user.save()
 			new_kado_user = KadoUser.objects.create(user=new_user)
 			new_kado_user.save()
-			new_wishlist = WishList.objects.create(name="public",user=new_user)
+			new_wishlist = WishList.objects.create(name="public-" + str(new_user.id) ,user=new_user)
 		# except ValueError:
 		# 	return render(request, 'WishListApp/signup.html', {'error_message':"username field must be set."})
 		except Exception, e:
 			return render(request, 'WishListApp/signup.html', {'error_message':str(e)})
-		return HttpResponseRedirect(reverse('WishListApp:user', args=(new_user.id,)))
+		return HttpResponseRedirect(reverse('WishListApp:user', args=(new_user.id, new_wishlist.id)))
 	
 	return render(request, 'WishListApp/signup.html',{'error_message':error_message})
 	# return HttpResponse("Login In Here")

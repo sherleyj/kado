@@ -13,42 +13,66 @@
 	</style>
 </head>
 <body>
-	<div class="user-header">
-		<h1>{{user.first_name}} {{user.last_name}}</h1>
+
+	<div class="menu-container">
+		<div class="menu-style"></div>
+		<div class="menu">
+			<div class="user-search-bar">
+				<input type="text" name="user-search" 
+				value=" Search users by phone number or email" 
+				onfocus="this.value=''" 
+				onblur="this.value= ' Search users by phone number or email' ">
+				<!-- style="visibility: hidden;" -->
+				<input type="submit" name="user-search-submit">
+			</div>
+			<div class="home-logo">
+				<a href="{% url 'WishListApp:index' %}">A</a>
+			</div>
+		</div>
 	</div>
 
+	</div>
+
+	<div class="user-header-wrapper">
+		<div class="user-header">
+			<h1>{{user.first_name}} {{user.last_name}}</h1>
+		</div>
+	</div>
 	<br>
-	<!-- <h2>Create a Wishlist</h2> -->
 
-<!-- 	<form action="{% url 'WishListApp:add_wishlist' user.id %}" method="post">
-	<fieldset>
-		<legend>Create a Wishlist:</legend>
-		{% csrf_token %}
-		Name:<br>
-		<input type="text" name="name"> 
-		<br><br>
-		<input type="submit" value="submit">
-	</fieldset>
-	</form> -->
-	<br>
-	<!-- <fieldset>
-		<legend>My Wish List</legend>
-		<ul>
-		{% for wishlist in wishlists %}
-			<li><a href="{% url 'WishListApp:wishlist' user.id wishlist.id %}">{{wishlist.name}}</a></li>
+	<div class="wishlist-wrapper">
+		<div class="wishlist">
+		{% if current_user == user %}
+			<div class="wishlist-add-item">
+					<form action="{% url 'WishListApp:additem' user.id wishlist.id %}" method="post">
+					<fieldset>
+						<legend>Add an item to your wish list</legend>
+						{% csrf_token %}
+						name:<br>
+						<input type="text" name="name">
+						<br>
+						url:<br>
+						<input type="url" name="url">
+						<br>
+						image url:<br>
+						<input type="url" name="image">
+						<br><br>
+						<input type="submit" name="submit">
+						<br><br>
+						{{error_msg}}
+					</fieldset>
+					</form>
+			</div>
+		{% endif %}
+		{% for item in wishlist_items reversed%}
+			<div class="wishlist-items">
+				<a href="{{item.url}}"> <img src="{{item.image}}" ></a>
+			</div>
 		{% endfor %}
-		</ul>
-	</fieldset> -->
-	<fieldset>
-		<legend>Items</legend>
-		<ul>
-		{% for item in wishlist_items %}
-			<li><a href="{{item.url}}">{{item.name}}</a></li>
-		{% endfor %}
-		</ul>
-	</fieldset>
-
-
+		</div>
+	</div>
+	</div>
+<!-- {{wishlist.id}} -->
 </body>
 
 </html>
