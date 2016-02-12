@@ -8,9 +8,6 @@
 
 	<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
 
-	<style>
-
-	</style>
 </head>
 <body>
 
@@ -48,17 +45,17 @@
 					<fieldset>
 						<legend>Add an item to your wish list</legend>
 						{% csrf_token %}
-						name:<br>
+<!-- 						name:<br>
 						<input type="text" name="name">
-						<br>
+						<br> -->
 						url:<br>
 						<input type="url" name="url">
 						<br>
-						image url:<br>
+<!-- 						image url:<br>
 						<input type="url" name="image">
-						<br><br>
+						<br><br> -->
 						<input type="submit" name="submit">
-						<br><br>
+						<br>
 						{{error_msg}}
 					</fieldset>
 					</form>
