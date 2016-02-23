@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from WishListApp.models import KadoUser, WishList, WishListItem
 from django.core.urlresolvers import reverse
 from WishListApp.scrape import amazon_images, gen_images, gen_title, get_soup
+import json
 # from . import srape
 # from bs4 import BeautifulSoup
 
@@ -89,11 +90,12 @@ def addItem(request, user_id, wishlist_id):
 			images = amazon_images(url)
 		else:
 			images = gen_images(url)
+		json_images = json.dumps(images)
 		# new_wishlist_item = WishListItem.objects.create(name=name, url=request.POST['url'], image=??, wish_list=wishlist)
 		# new_wishlist_item = WishListItem.objects.create(name=request.POST['name'], url=request.POST['url'], image=request.POST['image'], wish_list=wishlist)
 		# wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
 
-		return render(request, 'WishListApp/add_item.html', {'user':user, 'wishlist':wishlist, 'url':url, 'name':name, 'images':images,})
+		return render(request, 'WishListApp/add_item.html', {'user':user, 'wishlist':wishlist, 'url':url, 'name':name, 'images': images, 'json_images': json_images})
 	except Exception, e:
 		wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
 		error_msg = "Failed to add item. Error: "

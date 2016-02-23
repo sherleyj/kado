@@ -2,23 +2,19 @@ window.onload = function (){
 	var modal = document.getElementsByClassName("add-item-modal")[0];
 	var imgs = document.getElementsByClassName("page-img");
 	var span = document.getElementsByClassName("close")[0];
-	var modal_image = modal.getElementsByTagName("img")[0];
+	var modal_content = document.getElementsByClassName("add-item-modal-content")[0];
 	var i;
 	var images_string = ""
+	var chosen_image = 0;
 
-	for(i = 0; i< 200; i++){
-		images_string += images[i];
-	}
-	alert(images_string)
-
+	// open modal when user clicks on image
 	for(i = 0; i < imgs.length; i++) {
-	// open modal when user clicks on button
-		imgs[i].onclick = function() {
-			modal.style.display = "block";
-			// var selected_img = imgs[i].getElementsByTagName("img")[0];
-			// alert("hi");
-			modal_image.src = images[i];
-		}
+		var img_div = imgs[i]
+		img_div.onclick = displayModal;
+	}
+	function displayModal(){
+		modal.style.display = "block";
+		modal_content.getElementsByTagName('img')[0].src = this.getElementsByTagName('img')[0].src;
 	}
 
 	// close modal when user clicks on x

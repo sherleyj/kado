@@ -9,7 +9,8 @@
 		<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
 
 		<script type="text/javascript"> 
-			var images = "{{ images }}" 
+			var json_images = {{ json_images|safe }};
+			var images = {{ images|safe }};
 		</script>
 
 		<script type="text/javascript" src="{% static 'WishListApp/js/additem.js' %}"> </script>
@@ -47,16 +48,16 @@
 					<img src="{{ image }}" /> 
 				</div>
 				{% endfor %}
-				<!-- the modal -->
-				<div class="add-item-modal">
-					<!-- modal content -->
-					<div class="add-item-modal-content">
-						<span class="close">x</span>
-						<h2>add item</h2>
-						<img src="" />
-					</div>
-				</div>
+			</div>
+		</div>
 
+		<!-- the modal -->
+		<div class="add-item-modal">
+			<!-- modal content -->
+			<div class="add-item-modal-content">
+				<span class="close">x</span>
+				<h2>add item</h2>
+				<img src="" />
 			</div>
 		</div>
 
