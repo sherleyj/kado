@@ -8,14 +8,59 @@
 
 		<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
 
+		<script type="text/javascript"> 
+			var images = "{{ images }}" 
+		</script>
+
+		<script type="text/javascript" src="{% static 'WishListApp/js/additem.js' %}"> </script>
+
 	</head>
 	<body>
-		{{amazon}}
+
+	<div class="menu-container">
+		<div class="menu-style"></div>
+		<div class="menu">
+			<div class="user-search-bar">
+				<input type="text" name="user-search" 
+				value=" Search users by phone number or email" 
+				onfocus="this.value=''" 
+				onblur="this.value= ' Search users by phone number or email' ">
+				<!-- style="visibility: hidden;" -->
+				<input type="submit" name="user-search-submit">
+			</div>
+			<div class="home-logo">
+				<a href="{% url 'WishListApp:index' %}">A</a>
+			</div>
+		</div>
+	</div>
+
 		<br><br>
-		Title: {{name}}
+		<!-- Title: {{name}} -->
 		<br><br>
-		{%for image in images%}
-			<img src="{{image}}">
-		{% endfor %}
+
+		<div class="images-title">Choose an image to add an item to your Kado</div>
+		<div class="page-images-wrapper">
+			<div class="page-images">
+				{%for image in images%}
+				<div class="page-img">
+					<!-- Trigger/Open the modal -->
+					<img src="{{ image }}" /> 
+				</div>
+				{% endfor %}
+				<!-- the modal -->
+				<div class="add-item-modal">
+					<!-- modal content -->
+					<div class="add-item-modal-content">
+						<span class="close">x</span>
+						<h2>add item</h2>
+						<img src="" />
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<button id="test">click me</button>
+
 	</body>
 </html>

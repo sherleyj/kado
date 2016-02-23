@@ -5,7 +5,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login
 from WishListApp.models import KadoUser, WishList, WishListItem
 from django.core.urlresolvers import reverse
-from WishListApp.scrape import amazon_images, gen_images, gen_title
+from WishListApp.scrape import amazon_images, gen_images, gen_title, get_soup
+# from . import srape
+# from bs4 import BeautifulSoup
+
 
 # Create your views here.
 def index(request):
@@ -78,24 +81,22 @@ def addItem(request, user_id, wishlist_id):
 	url = ""
 	name = ""
 	images = []
-	is_amazon = ""
 	try:
 		url = request.POST['url']
+		# soup = get_soup(url)
 		name = gen_title(url)
 		if "amazon" in url:
 			images = amazon_images(url)
-			is_amazon = "AMAZON"
 		else:
 			images = gen_images(url)
-			is_amazon = "NOT AMAZON"
 		# new_wishlist_item = WishListItem.objects.create(name=name, url=request.POST['url'], image=??, wish_list=wishlist)
 		# new_wishlist_item = WishListItem.objects.create(name=request.POST['name'], url=request.POST['url'], image=request.POST['image'], wish_list=wishlist)
 		# wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
 
-		return render(request, 'WishListApp/add_item.html', {'user':user, 'wishlist':wishlist, 'url':url, 'name':name, 'images':images, 'amazon':is_amazon})
+		return render(request, 'WishListApp/add_item.html', {'user':user, 'wishlist':wishlist, 'url':url, 'name':name, 'images':images,})
 	except Exception, e:
 		wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
-		error_msg = "Failed to add item. "
+		error_msg = "Failed to add item. Error: "
 		return render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg + str(e)})
 		# return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
 	return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
