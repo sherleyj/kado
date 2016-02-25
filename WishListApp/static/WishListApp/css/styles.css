@@ -472,20 +472,35 @@
   }
 
   .add-item-modal-content  {
-		width: 50%;
-		/*position: relative;*/
+		width: 30%;
+		position: relative;
+		min-width: 280px;
 		margin: 10% auto;
-		padding: 5px 20px 13px 20px;
+		padding: 20px;
 		border-radius: 5px;
 		background-color: #f2f2f2;
 	}
 
 	.add-item-modal-content h2 {
 		text-align: center;
+		margin: 0;
+		padding-bottom: 10px;
+	}
+
+	.add-item-modal-content img {
+		max-width: 100%;
+		padding: 10px 0px;
+		/*text-align: center;*/
+		display: block;
+		margin: 0 auto;
 	}
 
 	.close {
-		font-size: 28px;
+		font-size: 18px;
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		padding: 5px;
 	}
 
 	.selected-img{
@@ -497,9 +512,53 @@
 		cursor: pointer;
 	}
 
+	.item-container {
+		width: 250px;
+		margin: 0 auto;
+		background-color: #fff;
+		border-radius: 5px;
+		padding: 0px 10px;
+		padding-bottom: 10px;
+	}
 
+	input[name="title"] {
+		height: 50px;
+		width: 90%;
+		font-size: 15px;
+		margin: 0;
+		padding: 0;
+		resize: none;
+		outline: none;
+		padding: 5px;
+	}
 
+	input[name="description"] {
+		height: 50px;
+		width: 90%;
+		font-size: 15px;
+		margin: 0;
+		padding: 0;
+		resize: none;
+		outline: none;
+		padding: 5px;
+	}
 
+	input[name="description"]:hover {
+		background-color: #f2f2f2;
+	}
 
+	input[name="title"]:hover {
+		background-color: #f2f2f2;
+	}
 
-
+	input[name="submit-item"]{
+		width:100%;
+		padding:10px 45px;
+		background-color:#2BC1F2;
+		border:none;
+		color:#fff;
+		font-size:18px;
+		font-weight:700;
+		cursor:pointer;
+		font-family:'Ubuntu',sans-serif
+	}

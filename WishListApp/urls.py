@@ -15,5 +15,6 @@ urlpatterns = [
     # url(r'^user/(?P<user_id>[0-9]+)/add-wish-list/$', views.addWishList, name='addWishList'),
     url(r'^user/(?P<user_id>[0-9]+)/add-wishlist/$', views.addWishList, name='add_wishlist'),
     url(r'^user/(?P<user_id>[0-9]+)/wishlist/(?P<wishlist_id>[0-9]+)$', views.wishList, name='wishlist'),
+    url(r'^user/(?P<user_id>[0-9]+)/(?P<wishlist_id>[0-9]+)/edit_item$', views.editItem, name="edititem"),
     url(r'^user/(?P<user_id>[0-9]+)/(?P<wishlist_id>[0-9]+)/add_item$', views.addItem, name="additem"),
 ]

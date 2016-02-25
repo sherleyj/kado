@@ -28,6 +28,8 @@ class WishListItem(models.Model):
 	name = models.CharField(max_length=100, blank=True)
 	url = models.URLField()
 	image = models.URLField()
+	descripton = models.CharField(max_length=500, blank=True)
+	store = models.CharField(max_length=100, blank=True)
 
 	def __str__(self):
 		return self.name

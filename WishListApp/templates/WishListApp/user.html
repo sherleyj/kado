@@ -41,7 +41,7 @@
 		<div class="wishlist">
 		{% if current_user == user %}
 			<div class="wishlist-add-item">
-					<form action="{% url 'WishListApp:additem' user.id wishlist.id %}" method="post">
+					<form action="{% url 'WishListApp:edititem' user.id wishlist.id %}" method="post">
 					<fieldset>
 						<legend>Add an item to your wish list</legend>
 						{% csrf_token %}
@@ -63,7 +63,7 @@
 		{% endif %}
 		{% for item in wishlist_items reversed%}
 			<div class="wishlist-items">
-				<a href="{{item.url}}"> <img src="{{item.image}}" ></a>
+				<a href="{{item.url}}" target="_blank"> <img src="{{item.image}}" ></a>
 			</div>
 		{% endfor %}
 		</div>

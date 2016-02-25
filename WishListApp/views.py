@@ -76,34 +76,52 @@ def wishList(request, user_id, wishlist_id):
 	wishlist_items = WishListItem.objects.filter(wish_list=wish_list)
 	return render(request, 'WishListApp/wishlist.html', {'user':user, 'wishlist':wish_list, 'wishlist_items':wishlist_items})
 
-def addItem(request, user_id, wishlist_id):
+def editItem(request, user_id, wishlist_id):
 	user = get_object_or_404(User, pk=user_id)
 	wishlist = get_object_or_404(WishList, pk=wishlist_id)
 	url = ""
-	name = ""
+	title = ""
 	images = []
 	try:
 		url = request.POST['url']
-		# soup = get_soup(url)
-		name = gen_title(url)
+		title = gen_title(url)
 		if "amazon" in url:
 			images = amazon_images(url)
 		else:
 			images = gen_images(url)
 		json_images = json.dumps(images)
-		# new_wishlist_item = WishListItem.objects.create(name=name, url=request.POST['url'], image=??, wish_list=wishlist)
-		# new_wishlist_item = WishListItem.objects.create(name=request.POST['name'], url=request.POST['url'], image=request.POST['image'], wish_list=wishlist)
-		# wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
-
-		return render(request, 'WishListApp/add_item.html', {'user':user, 'wishlist':wishlist, 'url':url, 'name':name, 'images': images, 'json_images': json_images})
+		return render(request, 'WishListApp/edit_item.html', {'user':user, 'wishlist':wishlist, 'item_url':url, 'current_user':request.user, 'title':title, 'images': images, 'json_images': json_images})
 	except Exception, e:
 		wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
-		error_msg = "Failed to add item. Error: "
+		error_msg = "Error: "
 		return render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg + str(e)})
 		# return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
 	return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
-	# render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': ""})
-	# return HttpResponse("Added Item")
+
+def addItem(request, user_id, wishlist_id):
+	user = get_object_or_404(User, pk=user_id)
+	wishlist = get_object_or_404(WishList, pk=wishlist_id)
+	error_msg = ""
+	wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
+	title = ""
+	img_url = ""
+	description = ""
+	item_url = ""
+	try:
+		title = request.POST['title']
+		img_url = request.POST['img_url']
+		description = request.POST['description']
+		item_url = request.POST['item_url']
+		new_wishlist_item = WishListItem.objects.create(name=title, url=item_url, image=img_url, wish_list=wishlist, descripton=description)
+		return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
+	except Exception, e:
+		error_msg = "Failed to add Item. Error: " 
+		# return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
+
+		return render(request, 'WishListApp/user.html', {'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg + str(e)})
+
+	return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
+
 
 def signUp(request):
 	username = request.POST.get('username')
