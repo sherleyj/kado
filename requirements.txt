@@ -1,1 +1,5 @@
 Django==1.9.2
+beautifulsoup4==4.4.1
+gunicorn==19.4.5
+dj-database-url==0.4.0
+whitenoise==2.0.6
