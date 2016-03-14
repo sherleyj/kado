@@ -146,6 +146,7 @@ def signUp(request):
 			new_user.save()
 			new_kado_user = KadoUser.objects.create(user=new_user)
 			new_kado_user.save()
+			# upload_photo_thumb(new_kado_user)
 			new_wishlist = WishList.objects.create(name="public-" + str(new_user.id) ,user=new_user)
 		# except ValueError:
 		# 	return render(request, 'WishListApp/signup.html', {'error_message':"username field must be set."})
@@ -155,3 +156,11 @@ def signUp(request):
 	
 	return render(request, 'WishListApp/signup.html',{'error_message':error_message})
 	# return HttpResponse("Login In Here")
+
+
+# def upload_photo_thumb(kado_user):
+
+
+
+
+
