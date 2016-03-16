@@ -3,6 +3,14 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+def upload_avatar_to(instance, filename):
+    import os
+    from django.utils.timezone import now
+    filename_base, filename_ext = os.path.splitext(filename)
+    return 'profiles/%s%s' % (
+        now().strftime("%Y%m%d%H%M%S"),
+        filename_ext.lower(),
+    )
 
 # Create your models here.
 
@@ -39,13 +47,4 @@ class WishListItem(models.Model):
 
 	def __str__(self):
 		return self.name
-
-def upload_avatar_to(instance, filename):
-    import os
-    from django.utils.timezone import now
-    filename_base, filename_ext = os.path.splitext(filename)
-    return 'profiles/%s%s' % (
-        now().strftime("%Y%m%d%H%M%S"),
-        filename_ext.lower(),
-    )
 
