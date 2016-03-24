@@ -25,6 +25,7 @@ class KadoUser(models.Model):
 	# upload_to value.
 	avatar = models.ImageField(blank=True, upload_to=upload_avatar_to)
 
+	#Django's User contains username, password, email, first name, last name.
 
 	def __str__(self):
 		return self.user.first_name + " " + self.user.last_name

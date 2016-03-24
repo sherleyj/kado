@@ -6,7 +6,9 @@ from django.contrib.auth import authenticate, login as auth_login
 from WishListApp.models import KadoUser, WishList, WishListItem
 from django.core.urlresolvers import reverse
 from WishListApp.scrape import amazon_images, gen_images, gen_title, get_soup
+from WishListApp.forms import UserForm, KadoUserForm, EditUserForm, EditKadoUserForm
 import json
+from django.contrib.auth.decorators import login_required
 # from . import srape
 # from bs4 import BeautifulSoup
 
@@ -45,6 +47,7 @@ def login(request):
 	if request.method == 'POST':
 		if user is not None:
 			if user.is_active:
+				# django function login() as authlogin so my own login can exist
 				auth_login(request, user)
 				wishlist = WishList.objects.get(user=user, name='public-'+str(user.id))
 				# return HttpResponse(username)
@@ -53,6 +56,7 @@ def login(request):
 				return HttpResponse("User Not Active.")
 		else:
 			msg = "invalid login"
+			# form = loginForm();
 	
 	return render(request, 'WishListApp/login.html', {'error_message':msg})
 			# return HttpResponse("invalid login")
@@ -157,8 +161,94 @@ def signUp(request):
 	return render(request, 'WishListApp/signup.html',{'error_message':error_message})
 	# return HttpResponse("Login In Here")
 
+def signUpNew(request):
+	registered = False
 
-# def upload_photo_thumb(kado_user, img):
+	if request.method == 'POST':
+		user_form = UserForm(data=request.POST)
+		kado_user_form = KadoUserForm(data=request.POST)
+
+		if user_form.is_valid() and kado_user_form.is_valid():
+			# user_form is a ModelForm so save() returns a new 
+			# user instance. It also saves it to the db unless 
+			# commit = False is specified.  
+			new_user = user_form.save()
+			new_user.set_password(new_user.password)
+			new_user.save()
+			# we should set the one to one relationship before
+			# saving to db
+			new_kado_user = kado_user_form.save(commit=False)
+			new_kado_user.user = new_user
+
+			if 'avatar' in request.FILES:
+				new_kado_user.avatar = request.FILES['avatar']
+
+			new_kado_user.save()
+			new_wishlist = WishList.objects.create(name="public-" + str(new_user.id) ,user=new_user)
+			registered = True
+			new_user = authenticate(username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'])
+			auth_login(request, new_user)
+			return HttpResponseRedirect(reverse('WishListApp:user', args=(new_user.id, new_wishlist.id)))
+
+		# Invalid Forms
+		else:
+			return render(request, 'WishListApp/signup.html', {'kado_user_form': kado_user_form, 'user_form': user_form, 'error_message': str(user_form.errors) + " " + str(kado_user_form.errors), 'registered':registered})
+
+	# clean form
+	else:
+		user_form = UserForm()
+		kado_user_form = KadoUserForm()
+
+	return render(request, 'WishListApp/signup.html', {'kado_user_form': kado_user_form, 'user_form': user_form,'error_message': "", 'registered':registered})
+
+@login_required
+def editUserInfo(request, user_id, wishlist_id):
+	user = get_object_or_404(User, pk=user_id)
+	kado_user = KadoUser.objects.get(user=user)
+	# kado_user = get_object_or_404(KadoUser, user=user)
+	wishlist = get_object_or_404(WishList, pk=wishlist_id)
+	updatedInfo = False
+
+	if request.method == 'POST':
+		user_form = EditUserForm(data=request.POST, instance=request.user)
+		kado_user_form = EditKadoUserForm(data=request.POST, instance=KadoUser.objects.get(user=request.user))
+
+		if user_form.is_valid() and kado_user_form.is_valid():
+			# user_form is a ModelForm so save() returns a new 
+			# user instance. It also saves it to the db unless 
+			# commit = False is specified.  
+			updated_user = user_form.save()
+			# we should set the one to one relationship before
+			# saving to db
+			updated_kado_user = kado_user_form.save(commit=False)
+
+			if 'avatar' in request.FILES:
+				updated_kado_user.avatar = request.FILES['avatar']
+
+			updated_kado_user.save()
+			updatedInfo = True
+		# Invalid Forms
+		else:
+			return render(request, 'WishListApp/editUserInfo.html', {'kado_user_form': kado_user_form, 'user_form': user_form, 'error_message': str(user_form.errors) + " " + str(kado_user_form.errors), 'updatedInfo':updatedInfo, 'user': user, 'wishlist': wishlist})
+
+	# clean form
+	else:
+		user_form = EditUserForm(instance=request.user)
+		kado_user_form = EditKadoUserForm(instance=KadoUser.objects.get(user=request.user))
+
+	return render(request, 'WishListApp/editUserInfo.html', {'kado_user_form': kado_user_form, 'user_form': user_form,'error_message': "", 'updatedInfo':updatedInfo, 'user': user, 'wishlist': wishlist})
+
+# Use the login_required() decorator to ensure only those logged in can access the view.
+@login_required
+def user_logout(request):
+    # Since we know the user is logged in, we can now just log them out.
+    logout(request)
+
+    # Take the user back to the homepage.
+    return HttpResponseRedirect('/rango/')
+
+
+
 
 
 

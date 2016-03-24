@@ -33,12 +33,18 @@
 	<div class="user-header-wrapper">
 		<div class="user-header">
 			<h1>{{user.first_name}} {{user.last_name}}</h1>
+			 <img src="{{ user.avatar.url }}">
+			 {% if current_user == user %}
+			 <a href="{% url 'WishListApp:editinfo' user.id wishlist.id %}">Edit Profile</a><br />
+			 {% endif %}
 		</div>
 	</div>
 	<br>
 
 	<div class="wishlist-wrapper">
 		<div class="wishlist">
+<!-- 		logged in as: {{current_user.first_name}} <br/>
+		This prof belongs to: {{user.first_name}} -->
 		{% if current_user == user %}
 			<div class="wishlist-add-item">
 					<form action="{% url 'WishListApp:edititem' user.id wishlist.id %}" method="post">
