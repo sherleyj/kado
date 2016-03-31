@@ -33,7 +33,7 @@
 	<div class="user-header-wrapper">
 		<div class="user-header">
 			<h1>{{user.first_name}} {{user.last_name}}</h1>
-			 <img src="{{ user.avatar.url }}">
+			 <img src="{{kado_user.avatar.url}}">
 			 {% if current_user == user %}
 			 <a href="{% url 'WishListApp:editinfo' user.id wishlist.id %}">Edit Profile</a><br />
 			 {% endif %}

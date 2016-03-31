@@ -3,6 +3,12 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+# needed to delete imagefield file from s3 when user replaces it
+import boto
+from boto.s3.connection import S3Connection, Bucket, Key
+from django.conf import settings
+
+
 def upload_avatar_to(instance, filename):
     import os
     from django.utils.timezone import now
@@ -29,6 +35,22 @@ class KadoUser(models.Model):
 
 	def __str__(self):
 		return self.user.first_name + " " + self.user.last_name
+
+	def save(self, *args, **kwargs):
+		# delete old file when replacing by updating the file
+		try:
+			this = KadoUser.objects.get(id=self.id)
+			if this.avatar != self.avatar:
+				conn = S3Connection(settings.AWS_S3_ACCESS_KEY_ID, settings.AWS_S3_SECRET_ACCESS_KEY)
+				bucket = conn.get_bucket(settings.AWS_STORAGE_BUCKET_NAME)
+				# k = Key(bucket)
+				key = bucket.get_key(str(this.avatar))
+				print(this.avatar)
+				# k.key = str(this.avatar)
+				bucket.delete_key(key)
+				# this.avatar.delete(save=False)
+		except: pass # when new photo then we do nothing, normal case
+		super(KadoUser, self).save(*args, **kwargs)
 
 class WishList(models.Model):
 	user = models.ForeignKey(User)

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import dj_database_url
+# from WishListProject import custom_storages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -138,6 +139,7 @@ DATABASES['default'].update(db_from_env)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
+# '*' will match any subdomain of kado.com (or whatever domain we use)
 ALLOWED_HOSTS = ['*']
 
 # Static files (CSS, JavaScript, Images)
@@ -156,22 +158,23 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# Set up for django-storages
+# Set up for AWS and django-storages --------------------------------------
 
 AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
     'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
     'Cache-Control': 'max-age=94608000',
 }
 
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-#AWS_S3_SECURE_URLS = False       # use http instead of https
-#AWS_QUERYSTRING_AUTH = False     # don't add complex authentication-related query parameters for requests
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_S3_SECURE_URLS = False       # use http instead of https
+AWS_QUERYSTRING_AUTH = False     # don't add complex authentication-related query parameters for requests
 AWS_S3_ACCESS_KEY_ID = 'AKIAIARDY3IXQUTZ6CDA'     # enter your access key id
 AWS_S3_SECRET_ACCESS_KEY = 'hrDxF6Lb2Sox+xKNSo7tTJdbh42ecoP031OA8ZlN' # enter your secret access key
 AWS_STORAGE_BUCKET_NAME = 'kado.media'
+
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
-MEDIAFILES_LOCATION = 'media'
-MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+# MEDIAFILES_LOCATION = 'media'
+# MEDIA_URL = "https://%s/profiles/" % AWS_S3_CUSTOM_DOMAIN
+# DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
