@@ -32,7 +32,8 @@ def user(request, user_id, wishlist_id, error_msg=""):
 	# 	return HttpResponse("You are user %s. You cannot access user %s's profile" % (request.user.id, user_id))
 		# return render(request, 'WishListApp/login.html')
 	user = get_object_or_404(User, pk=user_id)
-	kado_user = get_object_or_404(KadoUser, user=user)
+	kado_user = KadoUser.objects.get(user=user)
+	# kado_user = get_object_or_404(KadoUser, user=user)
 	wishlist = get_object_or_404(WishList, pk=wishlist_id)
 	#list of items in wish list
 	wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
@@ -50,7 +51,7 @@ def login(request):
 			if user.is_active:
 				# django function login() as authlogin so my own login can exist
 				auth_login(request, user)
-				wishlist = WishList.objects.get(user=user, name='public-'+str(user.id))
+				wishlist = WishList.objects.get(user=user, name='public-' + str(user.id))
 				# return HttpResponse(username)
 				return HttpResponseRedirect(reverse('WishListApp:user',args=(user.id,wishlist.id,)))
 			else:

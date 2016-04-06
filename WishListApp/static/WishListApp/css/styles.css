@@ -369,6 +369,10 @@
 		font-size: 20px;
 	}
 
+	.user-header img {
+		height: 100px;
+	}
+
 	.user-header h1 {
 		position: relative;
 		padding-top: 25px;
