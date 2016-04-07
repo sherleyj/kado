@@ -40,15 +40,15 @@ class KadoUser(models.Model):
 		# delete old file when replacing by updating the file
 		try:
 			this = KadoUser.objects.get(id=self.id)
+			# print("self: " + str(self.user.first_name))
+			# print("this: " + str(this.user.first_name))
 			if this.avatar != self.avatar:
 				conn = S3Connection(settings.AWS_S3_ACCESS_KEY_ID, settings.AWS_S3_SECRET_ACCESS_KEY)
 				bucket = conn.get_bucket(settings.AWS_STORAGE_BUCKET_NAME)
-				# k = Key(bucket)
 				key = bucket.get_key(str(this.avatar))
-				print(this.avatar)
-				# k.key = str(this.avatar)
+				# print("this: "+ str(this.avatar))
+				# print("self: " + str(self.avatar))
 				bucket.delete_key(key)
-				# this.avatar.delete(save=False)
 		except: pass # when new photo then we do nothing, normal case
 		super(KadoUser, self).save(*args, **kwargs)
 
