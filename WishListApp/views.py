@@ -32,13 +32,13 @@ def user(request, user_id, wishlist_id, error_msg=""):
 	# 	return HttpResponse("You are user %s. You cannot access user %s's profile" % (request.user.id, user_id))
 		# return render(request, 'WishListApp/login.html')
 	user = get_object_or_404(User, pk=user_id)
-	# kado_user = KadoUser.objects.get(user=user)
+	kado_user = KadoUser.objects.get(user=user)
 	# kado_user = get_object_or_404(KadoUser, user=user)
 	wishlist = get_object_or_404(WishList, pk=wishlist_id)
 	#list of items in wish list
 	wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
-	# return render(request, 'WishListApp/user.html',{'user':user, 'kado_user':kado_user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
-	return render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
+	return render(request, 'WishListApp/user.html',{'user':user, 'kado_user':kado_user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
+	# return render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
 
 def login(request):
 	# return HttpResponse("Login here!")
