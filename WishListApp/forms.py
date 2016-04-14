@@ -30,3 +30,9 @@ class EditKadoUserForm(forms.ModelForm):
 		model = KadoUser
 		exclude = ('user',)
 		fields = ('dob', 'avatar')
+
+class addItemForm(forms.ModelForm):
+	class Meta:
+		model = WishListItem
+		exclude = ('name', 'wish_list', 'image', 'description', 'store')
+		fields = ('url',)
