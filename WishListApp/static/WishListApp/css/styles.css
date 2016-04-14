@@ -419,11 +419,17 @@
 	}
 
 	.wishlist {
+		display: -webkit-inline-flex;
+		display: -ms-inline-flexbox;
   	display: inline-flex;
+  	-webkit-flex-direction: row;
   	flex-direction: row;
  		/*padding: 20px;*/
+ 		-webkit-flex-wrap: wrap;
  		flex-wrap: wrap;
+ 		-webkit-justify-content: center;
  	 	justify-content: center;
+ 	 	-webkit-align-items: center;
  	 	align-items: center;
   }
 
@@ -470,12 +476,18 @@
   }
 
   .page-images {
+  	display: -webkit-inline-flex;
+  	display: -ms-inline-flexbox;
   	display: inline-flex;
+  	-webkit-flex-direction: row;
   	flex-direction: row;
-  	padding: 20px;
+  	-webkit-flex-wrap: wrap;
   	flex-wrap: wrap;
+  	-webkit-justify-content: center;
   	justify-content: center;
+  	-webkit-align-items: center;
   	align-items: center;
+  	padding: 20px;
   }
 
   .page-img {
