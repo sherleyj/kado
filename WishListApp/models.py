@@ -67,6 +67,10 @@ class WishListItem(models.Model):
 	image = models.URLField()
 	descripton = models.CharField(max_length=500, blank=True)
 	store = models.CharField(max_length=100, blank=True)
+	# date_added = models.DateTimeField(auto_now_add=True)
+	# last_modified = models.DateTimeField(auto_now=True)
+	# received = models.BooleanField(default=False)
+	# purchased = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.name

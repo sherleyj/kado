@@ -8,6 +8,8 @@
 
 	<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
 
+	<script type="text/javascript" src="{% static 'WishListApp/js/user.js' %}"> </script>
+
 </head>
 <body>
 
@@ -32,14 +34,14 @@
 
 	<!-- <div class="user-header-wrapper"> -->
 		<div class="user-header">
-			{% if current_user == user %}
-			<a href="{% url 'WishListApp:editinfo' user.id wishlist.id %}">
-				Edit Profile</a>
-			{% endif %}
 			<div>
 			{% if kado_user.avatar %} <img src="{{kado_user.avatar.url}}"> {% endif %}
 			<h1>{{user.first_name}} {{user.last_name}}</h1>
 			</div>
+			{% if current_user == user %}
+			<a href="{% url 'WishListApp:editinfo' user.id wishlist.id %}">
+				Edit Profile</a>
+			{% endif %}
 		</div>
 	<!-- </div> -->
 	<br>
