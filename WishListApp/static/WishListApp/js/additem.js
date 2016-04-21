@@ -13,19 +13,19 @@ window.onload = function (){
 		var img_div = imgs[i]
 		img_div.onclick = displayModal;
 	}
-	function displayModal(){
+	function displayModal () {
 		modal.style.display = "block";
 		modal_content.getElementsByTagName('img')[0].src = this.getElementsByTagName('img')[0].src;
 		add_img_input.value = this.getElementsByTagName('img')[0].src;
 	}
 
 	// close modal when user clicks on x
-	span.onclick = function() {
+	span.onclick = function () {
 		modal.style.display = "none";
 	}
 
 	// close modal when user click outside modal
-	window.onclick = function(event){
+	window.onclick = function (event) {
 		if(event.target == modal){
 			modal.style.display = "none";
 		}
