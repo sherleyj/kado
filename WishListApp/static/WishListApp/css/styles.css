@@ -436,9 +436,9 @@
 	.wishlist {
 		display: -webkit-inline-flex;
 		display: -ms-inline-flexbox;
-  	display: inline-flex;
-  	-webkit-flex-direction: row;
-  	flex-direction: row;
+  		display: inline-flex;
+  		-webkit-flex-direction: row;
+  		flex-direction: row;
  		/*padding: 20px;*/
  		-webkit-flex-wrap: wrap;
  		flex-wrap: wrap;
