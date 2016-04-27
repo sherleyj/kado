@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from WishListApp.models import KadoUser, WishList, WishListItem
 from django.core.urlresolvers import reverse
 from WishListApp.scrape import amazon_images, gen_images, gen_title, get_soup
@@ -26,8 +26,8 @@ def give(request):
 
 def user(request, user_id, wishlist_id, error_msg=""):
 	# must be loggen in to see user pages/wishlists
-	if not request.user.is_authenticated():
-		return render(request, 'WishListApp/login.html')
+	# if not request.user.is_authenticated():
+	# 	return render(request, 'WishListApp/login.html')
 	# if int(request.user.id) != int(user_id):
 	# 	return HttpResponse("You are user %s. You cannot access user %s's profile" % (request.user.id, user_id))
 		# return render(request, 'WishListApp/login.html')
@@ -39,6 +39,11 @@ def user(request, user_id, wishlist_id, error_msg=""):
 	wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
 	return render(request, 'WishListApp/user.html',{'user':user, 'kado_user':kado_user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
 	# return render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
+
+def logout(request):
+	auth_logout(request)
+	return render(request, 'WishListApp/index.html')
+
 
 def login(request):
 	# return HttpResponse("Login here!")

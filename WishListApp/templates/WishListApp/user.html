@@ -38,20 +38,23 @@
 	</div>
 
 	<!-- <div class="user-header-wrapper"> -->
-		<div class="user-header">
-			<div>
-			{% if kado_user.avatar %} <img src="{{kado_user.avatar.url}}"> {% endif %}
-			<h1>{{user.first_name}} {{user.last_name}}</h1>
+		<div class="user-header-wrapper">
+			<div class="user-header">
+				{% if kado_user.avatar %} 
+				<img src="{{kado_user.avatar.url}}"> 
+				{% endif %}
+				<h1>{{user.first_name}} {{user.last_name}}</h1>
+				{% if current_user == user %}
+				<div class="user-buttons">
+					<a href="{% url 'WishListApp:editinfo' user.id wishlist.id %}">Edit Profile</a>
+					<a href="{% url 'WishListApp:logout' %}">Log out</a>
+				{% endif %}
+				</div>
 			</div>
-			{% if current_user == user %}
-			<a href="{% url 'WishListApp:editinfo' user.id wishlist.id %}">
-				Edit Profile</a>
-			{% endif %}
 		</div>
-	<!-- </div> -->
 	<br>
 
-	<div class="wishlist-wrapper">
+	<!-- <div class="wishlist-wrapper"> -->
 		<div class="wishlist">
 <!-- 		logged in as: {{current_user.first_name}} <br/>
 		This prof belongs to: {{user.first_name}} -->
@@ -88,10 +91,11 @@
 		<div class="wishlist-items-empty"></div>
 		<div class="wishlist-items-empty"></div>
 		<div class="wishlist-items-empty"></div>
-
+		<div class="wishlist-items-empty"></div>
+		<div class="wishlist-items-empty"></div>
 		</div>
 	</div>
-	</div>
+	<!-- </div> -->
 <!-- {{wishlist.id}} -->
 </body>
 
