@@ -23,11 +23,11 @@
 		<div class="menu">
 			<div class="user-search-bar">
 				<input type="text" name="user-search" 
-				value=" Search users by phone number or email" 
+				value=" Search users by email" 
 				onfocus="this.value=''" 
-				onblur="this.value= ' Search users by phone number or email' ">
+				onblur="this.value= ' Search users by email' ">
 				<!-- style="visibility: hidden;" -->
-				<input type="submit" name="user-search-submit">
+				<button type="submit" class="button button-blue">Go</button>
 			</div>
 			<div class="home-logo">
 				<a href="{% url 'WishListApp:index' %}">KADO</a>
@@ -46,8 +46,8 @@
 				<h1>{{user.first_name}} {{user.last_name}}</h1>
 				{% if current_user == user %}
 				<div class="user-buttons">
-					<a href="{% url 'WishListApp:editinfo' user.id wishlist.id %}">Edit Profile</a>
-					<a href="{% url 'WishListApp:logout' %}">Log out</a>
+					<button class="button" onclick="{% url 'WishListApp:editinfo' user.id wishlist.id %}">Edit Profile</button>
+					<button class="button button-red" onclick="{% url 'WishListApp:logout' %}">Log out</button>
 				{% endif %}
 				</div>
 			</div>
@@ -62,37 +62,29 @@
 			<div class="wishlist-add-item">
 					<h3>Add an item to your wishlist.</h3>
 					<form id="addItemForm" method="post" action="{% url 'WishListApp:edititem' user.id wishlist.id %}" enctype="multipart/form-data">
-				<!-- 	<form action="{% url 'WishListApp:edititem' user.id wishlist.id %}" method="post"> -->
-					<!-- <fieldset id="add-item-fieldset"> -->
 						{% csrf_token %}
-<!-- 						name:<br>
-						<input type="text" name="name">
-						<br> -->
 						url:<br>
 						<input type="url" name="url">
-						<br>
-<!-- 						image url:<br>
-						<input type="url" name="image">
-						<br><br> -->
-						<input type="submit" name="submit">
+						<button type="submit" class="button button-blue"> Add Item</button>
 						<br>
 						{{error_msg}}
-					<!-- </fieldset> -->
 					</form>
 			</div>
 		{% endif %}
 		{% for item in wishlist_items %}
-			<div class="wishlist-items">
-				<a href="{{item.url}}" target="_blank"> <img src="{{item.image}}" ></a>
+			<div class="wishlist-item">
+				<a href="{{item.url}}" target="_blank"> <img src="{{item.image}}" >
 				<span>{{ item.name }}</span>
+				</a>
 			</div>
 		{% endfor %}
-		<div class="wishlist-items-empty"></div>
-		<div class="wishlist-items-empty"></div>
-		<div class="wishlist-items-empty"></div>
-		<div class="wishlist-items-empty"></div>
-		<div class="wishlist-items-empty"></div>
-		<div class="wishlist-items-empty"></div>
+		<div class="wishlist-item-empty"></div>
+		<div class="wishlist-item-empty"></div>
+		<div class="wishlist-item-empty"></div>
+		<div class="wishlist-item-empty"></div>
+		<div class="wishlist-item-empty"></div>
+		<div class="wishlist-item-empty"></div>
+		
 		</div>
 	</div>
 	<!-- </div> -->
