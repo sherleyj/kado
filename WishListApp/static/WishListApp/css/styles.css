@@ -36,7 +36,8 @@
     	border-bottom: 1px solid #f8f8f8;
 	}
 
-	.menu-style-dark {
+	.index-menu-style {
+		height: 90px;
 		background-color: rgba(26,26,26,.2);
     	border-bottom: none;
 	}
