@@ -7,13 +7,19 @@ class loginForm(forms.Form):
 	psw = forms.CharField(label='Password', max_length=30)
 
 class UserForm(forms.ModelForm):
-	password = forms.CharField(widget=forms.PasswordInput())
-
+	password = forms.CharField(label='', widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+	username = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+	first_name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
+	last_name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
+	email = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Email'}))
 	class Meta:
 		model = User
 		fields = ('first_name', 'last_name','username', 'email', 'password')
 
+
 class KadoUserForm(forms.ModelForm):
+	avatar = forms.ImageField(label='Profile picture',required=False)
+	dob = forms.DateField(label='', widget=forms.SelectDateWidget(empty_label=("Year", "Month", "Day"),))
 	class Meta:
 		model = KadoUser
 		fields = ('dob', 'avatar')
@@ -25,7 +31,7 @@ class EditUserForm(forms.ModelForm):
 		fields = ('first_name', 'last_name', 'email')
 
 class EditKadoUserForm(forms.ModelForm):
-	avatar = forms.ImageField(label='picture',required=False)
+	avatar = forms.ImageField(label='Profile picture',required=False)
 	class Meta:
 		model = KadoUser
 		exclude = ('user',)

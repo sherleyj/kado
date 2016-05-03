@@ -6,56 +6,31 @@
 
 	<link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
 
-	<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
+	<link href="{% static 'WishListApp/css/signup.css' %}" rel="stylesheet">
 
 	<style>
 
 	</style>
 </head>
 <body>
+	<div class="signup-header">
+		<div class="signup-header-title"> <a href="{% url 'WishListApp:index' %}">KADO</a></div> 
+	</div>
 
-	<!-- <form action="{% url 'WishListApp:signup' %}" method="post">
-	<fieldset>
-		<legend>Sign Up</legend>
-		{% csrf_token %}
-		Username:<br>
-		<input type="text" name="username">
-		<br>
-		Password:<br>
-		<input type="password" name="psw">
-		<br>
-		Confirm Password:<br>
-		<input type="password" name="psw2">
-		<br>
-		First Name:<br>
-		<input type="text" name="first-name">
-		<br>
-		Last Name:<br>
-		<input type="text" name="last-name">
-		<br>
-		Email:<br>
-		<input type="text" name="email">
-		<br><br>
-		<input type="submit" name="submit">
-		<br><br>
+	<div class="signup-title">Create Your Page</div>
 
-		{{error_message}}
-	
-	</fieldset>
-	</form> -->
+	<div class="signup-form-container">
+		<form class="signup-form" id="user_form" method="post" action="{% url 'WishListApp:signup' %}"enctype="multipart/form-data">
+			{% csrf_token %}
+			<!-- Display each form. The as_p method wraps each element in a paragraph (<p>) element. This ensures each element appears on a new line, making everything look neater. -->
+			{{ user_form.as_p }}
+				<input class="register-button" type="submit" name="submit" value="Continue" />
+		</form>
+	</div>
 
-	<form id="user_form" method="post" action="{% url 'WishListApp:signup' %}"
-		enctype="multipart/form-data">
-		{% csrf_token %}
-
-		<!-- Display each form. The as_p method wraps each element in a paragraph
-                 (<p>) element. This ensures each element appears on a new line,
-                 making everything look neater. -->
-		{{ user_form.as_p }}
-		{{ kado_user_form.as_p }}
-
-		<input type="submit" name="submit" value="Register" />
-	</form>
+	<div class="login-here">
+	Already have an account? <a href="{% url 'WishListApp:login' %}">Log in</a>
+	</div>
 </body>
 
 </html>

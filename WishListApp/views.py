@@ -176,24 +176,17 @@ def signUpNew(request):
 
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
-		kado_user_form = KadoUserForm(data=request.POST)
 
-		if user_form.is_valid() and kado_user_form.is_valid():
+		if user_form.is_valid():
 			# user_form is a ModelForm so save() returns a new 
 			# user instance. It also saves it to the db unless 
 			# commit = False is specified.  
 			new_user = user_form.save()
 			new_user.set_password(new_user.password)
 			new_user.save()
-			# we should set the one to one relationship before
-			# saving to db
-			new_kado_user = kado_user_form.save(commit=False)
-			new_kado_user.user = new_user
-
-			if 'avatar' in request.FILES:
-				new_kado_user.avatar = request.FILES['avatar']
-
+			new_kado_user = KadoUser.objects.create(user=new_user)
 			new_kado_user.save()
+
 			new_wishlist = WishList.objects.create(name="public-" + str(new_user.id) ,user=new_user)
 			registered = True
 			new_user = authenticate(username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'])

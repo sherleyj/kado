@@ -1,0 +1,119 @@
+html {
+	background-color: #747D7D;
+	color:#1a1a1a;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.signup-header {
+	width: 100%;
+	top 0;
+	/*border-bottom: 5px solid #000;*/
+	background-color: #FFF;
+}
+
+.signup-header-title {
+	font-family: 'Megrim', cursive;
+	letter-spacing: 4px;
+	color: #747D7D;
+	font-size: 100px;
+	padding-left: 15px;
+}
+
+.signup-title {
+	text-align: center;
+	color: #fff;
+	font-size: 30px;
+	padding: 10px;
+	margin-top: 30px;
+}
+
+.signup-form-container {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.signup-form {
+	text-align:center;
+}
+
+input[type=text] {
+	height: 30px;
+	width: 300px;
+	font-size: 18px;
+	border-radius: 3px;
+	border: 1px solid #e1e8ed;
+	padding: 5px;
+}
+input[type=password] {
+	height: 30px;
+	width: 300px;
+	font-size: 18px;
+	border-radius: 3px;
+	border: 1px solid #e1e8ed;
+	padding: 5px;
+}
+
+
+input:focus {
+	outline: none;
+	border-color: #CD704B;
+}
+
+.register-button {
+	/*height: 30px;*/
+	width: 310px;
+	font-size: 15px;
+	border-radius: 3px;
+	text-decoration: none;
+	background-color: #CD704B;
+	padding: 10px 5px;
+    border: none;
+    color: #fff;
+    border: 1px solid #656C6C;
+
+    background: linear-gradient(#F4AA82, #CD704B);
+    background: -webkit-linear-gradient(#F4AA82, #CD704B); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#F4AA82, #CD704B); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#F4AA82, #CD704B); /* For Firefox 3.6 to 15 */
+	
+}
+
+.login-here {
+	padding-top: 30px;
+	width: 100%;
+	text-align: center;
+	font-size: 15px;
+	color: #fff;
+}
+
+.login-here a {
+	font-style: italic;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
