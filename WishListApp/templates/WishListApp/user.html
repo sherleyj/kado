@@ -27,7 +27,7 @@
 				onfocus="this.value=''" 
 				onblur="this.value= ' Search users by email' ">
 				<!-- style="visibility: hidden;" -->
-				<button type="submit" class="button button-blue">Go</button>
+				<button type="submit" class="button button-green">Go</button>
 			</div>
 			<div class="home-logo">
 				<a href="{% url 'WishListApp:index' %}">KADO</a>
@@ -69,7 +69,7 @@
 						{% csrf_token %}
 						url:<br>
 						<input type="url" name="url">
-						<button type="submit" class="button button-blue"> Add Item</button>
+						<button type="submit" class="button button-green"> Add Item</button>
 						<br>
 						{{error_msg}}
 					</form>
