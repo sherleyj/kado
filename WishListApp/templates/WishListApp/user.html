@@ -41,13 +41,17 @@
 		<div class="user-header-wrapper">
 			<div class="user-header">
 				{% if kado_user.avatar %} 
-				<img src="{{kado_user.avatar.url}}"> 
+				<img src="{{kado_user.avatar.url}}">
+				{% else %}
+				<img src="{% static 'WishListApp/images/user.png' %}"> 
 				{% endif %}
 				<h1>{{user.first_name}} {{user.last_name}}</h1>
 				{% if current_user == user %}
 				<div class="user-buttons">
-					<button class="button" onclick="{% url 'WishListApp:editinfo' user.id wishlist.id %}">Edit Profile</button>
-					<button class="button button-red" onclick="{% url 'WishListApp:logout' %}">Log out</button>
+					<a class="button" href="{% url 'WishListApp:editinfo' user.id wishlist.id %}">Edit Profile</a>
+					
+					<a class="button button-red" href="{% url 'WishListApp:logout' %}">Log out</a>
+					
 				{% endif %}
 				</div>
 			</div>
@@ -89,6 +93,9 @@
 	</div>
 	<!-- </div> -->
 <!-- {{wishlist.id}} -->
+
+<div class="footer"><div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+</div>
 </body>
 
 </html>
