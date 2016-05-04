@@ -545,9 +545,11 @@
   }
 
   .footer {
+  	position: fixed;
   	bottom: 0;
   	font-size: 10px;
   	text-align: center;
+  	width: 100%
   }
 
   .page-images-wrapper {
