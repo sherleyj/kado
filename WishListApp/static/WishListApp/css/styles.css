@@ -413,7 +413,7 @@
 	}
 
 	.user-header img {
-		height: 140px;
+		max-height: 140px;
 		/*display: inline-block;*/
 		border-radius: 70px;
 		/*padding-right: 10px;*/
@@ -424,6 +424,11 @@
 		/*margin-top: -27px;*/
 		margin: 0 auto;
 	}
+
+/*	.default-img{
+		border-radius: 0px;
+		background-color: #000;
+	}*/
 
 	.user-header h1 {
 		/*position: relative;*/

@@ -2,7 +2,7 @@ html {
 	background-color: #747D7D;
 	color:#1a1a1a;
 	font-family: 'Lato', sans-serif;
-	font-weight: 300;
+	font-weight: 100;
 	margin: 0;
 	padding: 0;
 }
@@ -15,6 +15,7 @@ body {
 a {
 	text-decoration: none;
 	color: inherit;
+	font-family: 'Megrim', cursive;
 }
 
 .signup-header {
@@ -33,20 +34,20 @@ a {
 }
 
 .signup-title {
-	text-align: center;
+	display: inline-block;
 	color: #fff;
 	font-size: 30px;
-	padding: 10px;
-	margin-top: 30px;
+	padding-bottom: 10px;
 }
 
 .signup-form-container {
-	width: 50%;
+	padding-top: 30px;
+	width: 313px;
 	margin: 0 auto;
 }
 
 .signup-form {
-	text-align:center;
+	/*text-align:center;*/
 }
 
 input[type=text] {
@@ -74,7 +75,7 @@ input:focus {
 
 .register-button {
 	/*height: 30px;*/
-	width: 310px;
+	width: 313px;
 	font-size: 15px;
 	border-radius: 3px;
 	text-decoration: none;
@@ -82,10 +83,11 @@ input:focus {
 	padding: 10px 5px;
     border: none;
     color: #fff;
-    border: 1px solid #656C6C;
+    /*border: 1px solid #656C6C;*/
+    box-shadow: 1px 1px 2px rgba(40, 40, 40, 0.57);
 
-    background: linear-gradient(#F4AA82, #CD704B);
-    background: -webkit-linear-gradient(#F4AA82, #CD704B); /* For Safari 5.1 to 6.0 */
+    background: linear-gradient( #F4AA82, #CD704B);
+    background: -webkit-linear-gradient( #F4AA82, #CD704B); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#F4AA82, #CD704B); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#F4AA82, #CD704B); /* For Firefox 3.6 to 15 */
 	

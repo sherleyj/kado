@@ -43,7 +43,7 @@
 				{% if kado_user.avatar %} 
 				<img src="{{kado_user.avatar.url}}">
 				{% else %}
-				<img src="{% static 'WishListApp/images/user.png' %}"> 
+				<img src="{% static 'WishListApp/images/photo-camera.png' %}"> 
 				{% endif %}
 				<h1>{{user.first_name}} {{user.last_name}}</h1>
 				{% if current_user == user %}
@@ -94,8 +94,12 @@
 	<!-- </div> -->
 <!-- {{wishlist.id}} -->
 
-<div class="footer"><div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+<div class="footer">
+
+<div>Icons made by <a href="http://www.flaticon.com/authors/daniel-bruce" title="Daniel Bruce">Daniel Bruce</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
 </div>
+
 </body>
 
 </html>
