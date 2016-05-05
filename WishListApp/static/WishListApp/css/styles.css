@@ -145,7 +145,7 @@
 
 	.title-overlay {
 		position: absolute;
-		background-color: rgba(22,22,22,.5);
+		background-color: rgba(22,22,22,.7);
 		opacity: .65;
 		height: 100%;
 		width:100%;
@@ -156,12 +156,12 @@
 		/*display: table;*/
 		/*text-align: center;*/
 		background-color: #1a1a1a;
-		background-image: url("../images/gift-wood.jpg");
+		background-image: url("../images/store.jpeg");
 		background-size: cover;
-		height: 500px;
+		min-height: 510px;
 		color: #f2f2f2;
 		width: 100%;
-		padding-top: 80px;
+		padding-top: 120px;
 		padding-bottom: 40px;
 		font-size: 20px;
 	}
@@ -178,19 +178,27 @@
 		letter-spacing: 9px;
 
 	}
+
+	.title p {
+		position: relative;
+		text-align: center;
+		z-index: 1;
+		text-shadow: 1px 1px 1px #000;
+		margin: 0;
+	}
  
 	.title h1 {
 		/*display: table-row;*/
 		position: relative;
 		font-family: 'Megrim', cursive;
-		font-size: 6em;
+		font-size: 5em;
 		padding-top: 25px;
-		padding-bottom: 5px;
+		/*padding-bottom: 5px;*/
 		z-index: 1;
 		width: 100%;
 		text-align: center;
 		top:0%;
-		letter-spacing: 32px;
+		letter-spacing: 25px;
 		margin: 0;
 		text-shadow: 2px 2px 2px #000;
 	}
@@ -218,16 +226,62 @@
 	}
 
 	.signup-btn {
-		display: inline-block;
+		display: block;
 		position: relative;
 		z-index: 1;
-		font-size: 20px;
+		font-size: 15px;
+		width: 250px;
+		margin: 0 auto;
+		border-radius: 3px;
+		text-decoration: none;
+		background-color: #CD704B;
+		padding: 8px 5px;
+	    border: none;
+	    /*border: 1px solid #656C6C;*/
+	    box-shadow: 1px 1px 2px rgba(40, 40, 40, 0.57);
+
+	    background: linear-gradient( #F4AA82, #CD704B);
+	    background: -webkit-linear-gradient( #F4AA82, #CD704B); /* For Safari 5.1 to 6.0 */
+	    background: -o-linear-gradient(#F4AA82, #CD704B); /* For Opera 11.1 to 12.0 */
+	    background: -moz-linear-gradient(#F4AA82, #CD704B); /* For Firefox 3.6 to 15 */
+
+	    text-align: center;
 		font-family: 'Lato', sans-serif;
-		font-weight: 300;
-		text-align: left;
-		vertical-align: middle;
-		padding-top: 20px;
+		font-weight: 400;
+		text-align: middle;
+		color: #f2f2f2;
+		background-color: #CD704B;
+		margin-bottom: 15px;
+
 	} 
+
+	.signin-btn {
+		display: block;
+		position: relative;
+		z-index: 1;
+		font-size: 15px;
+		width: 250px;
+		margin: 0 auto;
+		border-radius: 3px;
+		text-decoration: none;
+		background-color: #a6a6a6;
+		padding: 8px 5px;
+	    border: none;
+	    /*border: 1px solid #656C6C;*/
+	    box-shadow: 1px 1px 2px rgba(40, 40, 40, 0.57);
+	    background: linear-gradient( #cccccc, #a6a6a6);
+	    background: -webkit-linear-gradient( #cccccc, #a6a6a6); /* For Safari 5.1 to 6.0 */
+	    background: -o-linear-gradient(#cccccc, #a6a6a6); /* For Opera 11.1 to 12.0 */
+	    background: -moz-linear-gradient(#cccccc, #a6a6a6); /* For Firefox 3.6 to 15 */
+
+
+	    text-align: center;
+		font-family: 'Lato', sans-serif;
+		font-weight: 400;
+		text-align: middle;
+		color: #f2f2f2;
+		margin-top: 15px;
+	}
 
 	.cta a {
 		padding: 7px 15px;
