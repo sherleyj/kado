@@ -162,7 +162,7 @@
 		/*display: table;*/
 		/*text-align: center;*/
 		background-color: #1a1a1a;
-		background-image: url("../images/gifts-notfree.jpg");
+		background-image: url("../images/wedding.jpeg");
 		background-size: cover;
 		min-height: 350px;
 		color: #f2f2f2;
@@ -246,10 +246,10 @@
 	    /*border: 1px solid #656C6C;*/
 	    box-shadow: 1px 1px 2px rgba(40, 40, 40, 0.57);
 
-	    background: linear-gradient( #F4AA82, #CD704B);
-	    background: -webkit-linear-gradient( #F4AA82, #CD704B); /* For Safari 5.1 to 6.0 */
-	    background: -o-linear-gradient(#F4AA82, #CD704B); /* For Opera 11.1 to 12.0 */
-	    background: -moz-linear-gradient(#F4AA82, #CD704B); /* For Firefox 3.6 to 15 */
+/*	    background: linear-gradient( #F4AA82, #CD704B);
+	    background: -webkit-linear-gradient( #F4AA82, #CD704B); 
+	    background: -o-linear-gradient(#F4AA82, #CD704B); 
+	    background: -moz-linear-gradient(#F4AA82, #CD704B); */
 
 	    text-align: center;
 		font-family: 'Lato', sans-serif;
@@ -307,10 +307,26 @@
 		height: 30px;
 		width: 300px;
 		font-size: 18px;
-		border-radius: 3px;
+		/*border-radius: 3px;*/
 		border: 1px solid #e1e8ed;
+		border: none;
 		padding: 5px;	
-		margin-bottom: 20px;
+		/*margin-bottom: 20px;*/
+	}
+
+	.index-user-search-bar {
+		outline:none;
+  		border: none;
+  		border-radius: 4px;
+	}
+
+	.index-user-submit {
+		height: 40px;
+		font-size: 18px;
+		margin-left: -5px;
+		border-radius: 0;
+		border: none;
+		vertical-align: bottom;
 	}
 
 	.index-user-search-error {

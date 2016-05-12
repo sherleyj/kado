@@ -57,8 +57,8 @@
 		<h2>Find a Kado Wish List.</h2>
 		<form method="post" action="{% url 'WishListApp:index'%}" enctype="multipart/form-data">
 			{% csrf_token %}
-			<input type="email" name="email" class="index-user-search-bar" placeholder="enter email or phone number">
-			<button type="submit">Search</button>
+			<input type="email" name="email" class="index-user-search-bar" placeholder="Enter email or phone number.">
+			<button type="submit" class="button button-green index-user-submit">Search</button>
 		</form>
 		<div class="index-user-search-error">
 			{{error_msg}}
