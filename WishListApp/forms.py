@@ -42,3 +42,7 @@ class addItemForm(forms.ModelForm):
 		model = WishListItem
 		exclude = ('name', 'wish_list', 'image', 'description', 'store')
 		fields = ('url',)
+
+
+
+

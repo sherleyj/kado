@@ -2,7 +2,11 @@
 {% load static %}
 <html>
 <head>
+	<link rel="icon" href="http://example.com/favicon.png">
+
 	<link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Karla:400,700' rel='stylesheet' type='text/css'>
 
 <!-- 	<link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'> -->
 
@@ -10,11 +14,29 @@
 
 	<link href="{% static 'WishListApp/css/styles.css' %}" rel="stylesheet">
 
-	<!-- used for numbers on home page -->
-	<link href='https://fonts.googleapis.com/css?family=Stint+Ultra+Condensed' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,100,300,500,700,800,900' rel='stylesheet' type='text/css'>
 
 </head>
 <body>
+
+	<div class="menu-container">
+		<div class="menu-style index-menu-style">
+			<div class="index-menu">
+			<span class="kado-title">A</span>
+			<div class="header-text">
+				<ul>
+					<li>
+						Have an account?
+					</li>
+					<li>
+						<a href="{% url 'WishListApp:login' %}">LOG IN</a>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+	</div>
+	
 
 	
 	<div class="title-wrapper">
@@ -22,15 +44,27 @@
 
 			<h1>KADO</h1>
 			<p>Gift giving made easy.</p>
-			<p>For surprises or any special occasion.</p>
+			<!-- <p>For surprises or any special occasion.</p> -->
+			<p>For those special moments or just because.</p>
 			<br/>
 			<div class="title-overlay"></div> 
-			<a class="signup-btn"href="{% url 'WishListApp:signup' %}">Get Started</a> 
-			<a class="signin-btn"href="{% url 'WishListApp:login' %}">Sign In</a> 
+			<a class="signup-btn"href="{% url 'WishListApp:signup' %}">Sign Up</a> 
+			<!-- <a class="signin-btn"href="{% url 'WishListApp:login' %}">Sign In</a>  -->
 		</div>
 	</div>
 
-	<div></div>
+	<div class="search-container">
+		<h2>Find a Kado Wish List.</h2>
+		<form method="post" action="{% url 'WishListApp:index'%}" enctype="multipart/form-data">
+			{% csrf_token %}
+			<input type="email" name="email" class="index-user-search-bar" placeholder="enter email or phone number">
+			<button type="submit">Search</button>
+		</form>
+		<div class="index-user-search-error">
+			{{error_msg}}
+		</div>
+
+	</div>
 
 </body>
 	

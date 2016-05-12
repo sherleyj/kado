@@ -9,14 +9,20 @@ from WishListApp.scrape import amazon_images, gen_images, gen_title, get_soup
 from WishListApp.forms import UserForm, KadoUserForm, EditUserForm, EditKadoUserForm
 import json
 from django.contrib.auth.decorators import login_required
-# from . import srape
-# from bs4 import BeautifulSoup
-
 
 # Create your views here.
-def index(request):
-	return render(request, 'WishListApp/index.html')
+def index(request, error_msg=""):
 	# return HttpResponse("Hello, world.  You're at the WishListApp index.")
+	if request.method == 'POST':
+		try:
+			user = User.objects.get(email=request.POST.get('email'))
+			wishlist = WishList.objects.get(user=user, name='public-' + str(user.id))
+			return HttpResponseRedirect(reverse('WishListApp:user', args=(user.id, wishlist.id,)))
+		except User.DoesNotExist:
+			error_msg = "User not found."
+			return render(request, 'WishListApp/index.html', {'error_msg': error_msg})
+	else:
+		return render(request, 'WishListApp/index.html')
 
 def about(request):
 	return HttpResponse("About Us / How it works")
@@ -31,6 +37,15 @@ def user(request, user_id, wishlist_id, error_msg=""):
 	# if int(request.user.id) != int(user_id):
 	# 	return HttpResponse("You are user %s. You cannot access user %s's profile" % (request.user.id, user_id))
 		# return render(request, 'WishListApp/login.html')
+	if request.method == 'POST':
+		try:
+			user_s = User.objects.get(email=request.POST.get('email'))
+			wishlist_s = WishList.objects.get(user=user_s, name='public-' + str(user_s.id))
+			print("hello")
+			return HttpResponseRedirect(reverse('WishListApp:user', args=(user_s.id, wishlist_s.id,)))
+		except User.DoesNotExist:
+			error_msg = "User not found."
+			# return render(request, 'WishListApp/user.html',{'user':user, 'kado_user':kado_user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
 	user = get_object_or_404(User, pk=user_id)
 	kado_user = KadoUser.objects.get(user=user)
 	# kado_user = get_object_or_404(KadoUser, user=user)
