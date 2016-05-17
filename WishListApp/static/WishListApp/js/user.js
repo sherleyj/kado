@@ -14,4 +14,5 @@ $(document).ready(function(){
 
 	$(window).resize(menu_resize);
 	menu_resize();
+
 });

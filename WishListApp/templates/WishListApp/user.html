@@ -2,11 +2,12 @@
 {% load static %}
 <html>
 <head>
+	<!-- Kado font -->
 	<link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
 
-	<link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+<!-- 	<link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'> -->
 
-	<link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,100,300,500,700,800,900' rel='stylesheet' type='text/css'>
+	<!-- <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,100,300,500,700,800,900' rel='stylesheet' type='text/css'> -->
 
 	<link href='https://fonts.googleapis.com/css?family=Karla:400,700' rel='stylesheet' type='text/css'>
 
@@ -86,6 +87,9 @@
 		{% endif %}
 		{% for item in wishlist_items %}
 			<div class="wishlist-item">
+				{% if current_user == user %}
+				<button class="button-remove"></button>
+				{% endif %}
 				<a href="{{item.url}}" target="_blank"> <img src="{{item.image}}" >
 				<span>{{ item.name }}</span>
 				</a>
