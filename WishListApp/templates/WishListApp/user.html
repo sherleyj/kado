@@ -76,10 +76,7 @@
 					<h3>Add an item to your wishlist.</h3>
 					<form id="addItemForm" method="post" action="{% url 'WishListApp:edititem' user.id wishlist.id %}" enctype="multipart/form-data">
 						{% csrf_token %}
-						<input type="url" name="additem"
-						value="  Enter a url" 
-						onfocus="this.value=''" 
-						onblur="this.value= '  Enter a url' ">
+						<input type="url" name="url">
 						<button type="submit" class="button button-green button-additem">Continue</button>
 					</form>
 				</div>
@@ -93,6 +90,7 @@
 				<a href="{{item.url}}" target="_blank"> <img src="{{item.image}}" >
 				<span>{{ item.name }}</span>
 				</a>
+				<div class="wishlist-item-overlay"></div>
 			</div>
 		{% endfor %}
 		<div class="wishlist-item-empty"></div>

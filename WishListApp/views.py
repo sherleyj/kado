@@ -106,6 +106,7 @@ def wishList(request, user_id, wishlist_id):
 	return render(request, 'WishListApp/wishlist.html', {'user':user, 'wishlist':wish_list, 'wishlist_items':wishlist_items})
 
 def editItem(request, user_id, wishlist_id):
+	print("In editItem.")
 	user = get_object_or_404(User, pk=user_id)
 	wishlist = get_object_or_404(WishList, pk=wishlist_id)
 	url = ""

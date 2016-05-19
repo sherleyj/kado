@@ -453,7 +453,7 @@
   		border: none;
 	}
 
-	input[name="additem"] {
+	input[name="url"] {
 		font-size: 15px;
 	  	border-style: solid;
 	  	border-color: #C1BFBF;
@@ -466,7 +466,7 @@
 	  	padding-left: 5px;
 	}
 
-	input[name="additem"]:focus {
+	input[name="url"]:focus {
 		outline:none;
 	  	border-color: #C1BFBF;
 	}
@@ -648,8 +648,17 @@
    	box-shadow: 0 1px 2px 0 rgba(100,100,100,0.22);
   }
 
+
   .wishlist-item:hover button {
   	display: inline;
+  	z-index: 99;
+  }
+
+  .wishlist-item:hover img {
+  	width:100%;
+    height:100%;
+    background-color:#000;
+    opacity:0.5;
   }
 
   .wishlist-item-empty{
@@ -697,6 +706,13 @@
   	box-shadow: 1px 1px 2px #f2f2f2;
   	display: block;
   }
+
+/*  .wishlist-item img:hover {
+  	width:100%;
+    height:100%;
+    background-color:#000;
+    opacity:0.5;
+  }*/
 
   .wishlist-item span {
   	text-align: center;
