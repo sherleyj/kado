@@ -82,7 +82,7 @@
 				</div>
 			</div>
 		{% endif %}
-		{% for item in wishlist_items %}
+		{% for item in wishlist_items reversed%}
 			<div class="wishlist-item">
 				{% if current_user == user %}
 				<button class="button-remove"></button>
