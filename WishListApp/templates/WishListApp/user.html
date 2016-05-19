@@ -76,7 +76,7 @@
 					<h3>Add an item to your wishlist.</h3>
 					<form id="addItemForm" method="post" action="{% url 'WishListApp:edititem' user.id wishlist.id %}" enctype="multipart/form-data">
 						{% csrf_token %}
-						<input type="url" name="url">
+						<input type="url" name="url" placeholder= "Enter a url.">
 						<button type="submit" class="button button-green button-additem">Continue</button>
 					</form>
 				</div>
