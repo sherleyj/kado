@@ -15,4 +15,16 @@ $(document).ready(function(){
 	$(window).resize(menu_resize);
 	menu_resize();
 
+	$(".button-edit").click(function(){
+		$(".modal").css("display", "block");
+	})
+
+	$(".close").click(function(){
+		$(".modal").css("display", "none");
+	})
+
+	// $(window).click(function(){
+
+	// })
+
 });

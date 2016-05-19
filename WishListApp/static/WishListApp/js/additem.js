@@ -1,8 +1,8 @@
 window.onload = function (){
-	var modal = document.getElementsByClassName("add-item-modal")[0];
+	var modal = document.getElementsByClassName("modal")[0];
 	var imgs = document.getElementsByClassName("page-img");
 	var span = document.getElementsByClassName("close")[0];
-	var modal_content = document.getElementsByClassName("add-item-modal-content")[0];
+	var modal_content = document.getElementsByClassName("modal-content")[0];
 	var add_img_input = document.getElementById("input_img_url");
 	var i;
 	var images_string = ""

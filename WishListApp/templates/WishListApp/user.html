@@ -85,6 +85,7 @@
 		{% for item in wishlist_items reversed%}
 			<div class="wishlist-item">
 				{% if current_user == user %}
+				<button class="button-edit"></button>
 				<button class="button-remove"></button>
 				{% endif %}
 				<a href="{{item.url}}" target="_blank"> <img src="{{item.image}}" >
@@ -105,6 +106,31 @@
 	<!-- </div> -->
 <!-- {{wishlist.id}} -->
 
+<!-- the modal -->
+		<div class="modal">
+			<!-- modal content -->
+			<div class="modal-content">
+				<span class="close">x</span>
+				<div class="item-container">
+					<img src="" /> 
+					<form action="{% url 'WishListApp:additem' user.id wishlist.id %}" method="post" id="add_item_form">
+						{% csrf_token %}
+						Item Title:
+						<input type="text" name="title" value="{{title}}"></input> 
+						<br><br>
+						<input type="text" name="description" placeholder="Add a description"></input>
+						<input type="text" name="img_url" value="" id="input_img_url" style="display:none"></input>
+						<input type="text" name="item_url" value="{{item_url}}" id="item_url" style="display:none"></input>
+						<br><br>
+						<input type="submit" name="submit-item" value="Add to Kado!"></input>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+
+
 <div class="footer">
 
 {% if not kado_user.avatar %} 
@@ -112,6 +138,8 @@
 <div>Icons made by <a href="http://www.flaticon.com/authors/daniel-bruce" title="Daniel Bruce">Daniel Bruce</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
 {% endif %}
+
+<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
 </div>
 
