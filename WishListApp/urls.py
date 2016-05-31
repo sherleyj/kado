@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^user/(?P<user_id>[0-9]+)/(?P<wishlist_id>[0-9]+)/edit_item$', views.editItem, name="edititem"),
     url(r'^user/(?P<user_id>[0-9]+)/(?P<wishlist_id>[0-9]+)/add_item$', views.addItem, name="additem"),
     url(r'^user/(?P<user_id>[0-9]+)/(?P<wishlist_id>[0-9]+)/edit_profile$', views.editUserInfo, name="editinfo"),
+    url(r'^user/(?P<user_id>[0-9]+)/(?P<wishlist_id>[0-9]+)/$', views.findUser, name='finduser'),
+    url(r'^user/(?P<user_id>[0-9]+)/(?P<wishlist_id>[0-9]+)/(?P<item_id>[0-9]+)/edit_item$', views.editItem, name="edititemuser"),
 ]

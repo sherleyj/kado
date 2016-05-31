@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from WishListApp.models import KadoUser, WishList, WishListItem
 from django.core.urlresolvers import reverse
 from WishListApp.scrape import amazon_images, gen_images, gen_title, get_soup
-from WishListApp.forms import UserForm, KadoUserForm, EditUserForm, EditKadoUserForm
+from WishListApp.forms import UserForm, KadoUserForm, EditUserForm, EditKadoUserForm, EditItemForm
 import json
 from django.contrib.auth.decorators import login_required
 
@@ -267,6 +267,24 @@ def user_logout(request):
     return HttpResponseRedirect('/rango/')
 
 
+def edit_item(request, user_id, wishlist_id, item_id):
+	user = get_object_or_404(User, pk=user_id)
+	kado_user = KadoUser.objects.get(user=user)
+	# kado_user = get_object_or_404(KadoUser, user=user)
+	wishlist = get_object_or_404(WishList, pk=wishlist_id)
+	updatedInfo = False
+
+def findUser(request, user_id, wishlist_id):
+	if request.method == 'POST':
+		try:
+			user = User.objects.get(email=request.POST.get('email'))
+			wishlist = WishList.objects.get(user=user, name='public-' + str(user.id))
+			return HttpResponseRedirect(reverse('WishListApp:user', args=(user.id, wishlist.id,)))
+		except User.DoesNotExist:
+			error_msg = "User not found."
+			return render(request, 'WishListApp/index.html', {'error_msg': error_msg})
+	else:
+		return HttpResponse("Could not find user.")
 
 
 

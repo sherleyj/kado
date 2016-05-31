@@ -26,7 +26,7 @@
 		<div class="menu-style"></div>
 		<div class="menu">
 			<div class="user-search-bar">
-				<form method="post" action="{% url 'WishListApp:user' user.id wishlist.id %}" enctype="multipart/form-data">
+				<form method="post" action="{% url 'WishListApp:finduser' user.id wishlist.id %}" enctype="multipart/form-data">
 				{% csrf_token %}
 				<span style="color:red">{{error_msg}}</span>
 				<input type="text" name="user-search" 
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 
-	</div>
+	<!-- </div> -->
 
 	<!-- <div class="user-header-wrapper"> -->
 		<div class="user-header-wrapper">
@@ -85,11 +85,12 @@
 		{% for item in wishlist_items reversed%}
 			<div class="wishlist-item">
 				{% if current_user == user %}
-				<button class="button-edit"></button>
-				<button class="button-remove"></button>
+				<button class="button-icon button-edit"></button>
+				<button class="button-icon button-remove"></button>
 				{% endif %}
 				<a href="{{item.url}}" target="_blank"> <img src="{{item.image}}" >
 				<span>{{ item.name }}</span>
+				<span id="item_id" style="display:none;">{{ item.id }}</span>
 				</a>
 				<div class="wishlist-item-overlay"></div>
 			</div>
@@ -106,28 +107,20 @@
 	<!-- </div> -->
 <!-- {{wishlist.id}} -->
 
-<!-- the modal -->
-		<div class="modal">
-			<!-- modal content -->
-			<div class="modal-content">
-				<span class="close">x</span>
-				<div class="item-container">
-					<img src="" /> 
-					<form action="{% url 'WishListApp:additem' user.id wishlist.id %}" method="post" id="add_item_form">
-						{% csrf_token %}
-						Item Title:
-						<input type="text" name="title" value="{{title}}"></input> 
-						<br><br>
-						<input type="text" name="description" placeholder="Add a description"></input>
-						<input type="text" name="img_url" value="" id="input_img_url" style="display:none"></input>
-						<input type="text" name="item_url" value="{{item_url}}" id="item_url" style="display:none"></input>
-						<br><br>
-						<input type="submit" name="submit-item" value="Add to Kado!"></input>
-					</form>
+			<!-- the modal -->
+			<div class="modal">
+				<!-- modal content -->
+				<div class="modal-content">
+					<div class="item-container">
+						<h3>Edit Item</h3>
+						<button class="button-icon button-x"></button>
+					</div>
+					<div class="item-container">
+						<img src="" /> 
+						<p></p>
+					</div>
 				</div>
 			</div>
-		</div>
-
 
 
 

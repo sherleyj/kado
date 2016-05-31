@@ -20,17 +20,21 @@
 
 	<div class="menu-container">
 		<div class="menu-style"></div>
-		<div class="menu">
+		<div class="menu menu-add-item">
 			<div class="user-search-bar">
+				<form method="post" action="{% url 'WishListApp:finduser' user.id wishlist.id %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				<span style="color:red">{{error_msg}}</span>
 				<input type="text" name="user-search" 
-				value=" Search users by phone number or email" 
+				value="Search users by email" 
 				onfocus="this.value=''" 
-				onblur="this.value= ' Search users by phone number or email' ">
+				onblur="this.value= 'Search users by email' ">
 				<!-- style="visibility: hidden;" -->
-				<input type="submit" name="user-search-submit">
+				<button type="submit" class="button button-green">Go</button>
+				</form>
 			</div>
 			<div class="home-logo">
-				<a href="{% url 'WishListApp:index' %}">A</a>
+				<a href="{% url 'WishListApp:index' %}">KADO</a>
 			</div>
 		</div>
 	</div>

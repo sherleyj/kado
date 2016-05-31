@@ -1,3 +1,5 @@
+
+
 $(document).ready(function(){
 
 	var num_columns_wl = function(){
@@ -12,19 +14,21 @@ $(document).ready(function(){
 		$(".menu").css("width", new_menu_width );
 	}
 
+	var open_modal = function(){
+		$(".modal").css("display", "block");
+		$(".item_id_input").val($(this).$("#item_id span").text());
+	}
+
+	var close_modal = function(){
+		$(".modal").css("display", "none");
+	}
+
 	$(window).resize(menu_resize);
 	menu_resize();
 
-	$(".button-edit").click(function(){
-		$(".modal").css("display", "block");
-	})
+	$(".button-edit").click(open_modal);
+	$(".button-x").click(close_modal);
 
-	$(".close").click(function(){
-		$(".modal").css("display", "none");
-	})
-
-	// $(window).click(function(){
-
-	// })
-
+	// $(window).click(function(){})
+	// $(".button-remove").click();
 });
