@@ -36,24 +36,41 @@ def user(request, user_id, wishlist_id, error_msg=""):
 	# 	return render(request, 'WishListApp/login.html')
 	# if int(request.user.id) != int(user_id):
 	# 	return HttpResponse("You are user %s. You cannot access user %s's profile" % (request.user.id, user_id))
-		# return render(request, 'WishListApp/login.html')
-	if request.method == 'POST':
-		try:
-			user_s = User.objects.get(email=request.POST.get('email'))
-			wishlist_s = WishList.objects.get(user=user_s, name='public-' + str(user_s.id))
-			print("hello")
-			return HttpResponseRedirect(reverse('WishListApp:user', args=(user_s.id, wishlist_s.id,)))
-		except User.DoesNotExist:
-			error_msg = "User not found."
-			# return render(request, 'WishListApp/user.html',{'user':user, 'kado_user':kado_user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
-	user = get_object_or_404(User, pk=user_id)
-	kado_user = KadoUser.objects.get(user=user)
-	# kado_user = get_object_or_404(KadoUser, user=user)
-	wishlist = get_object_or_404(WishList, pk=wishlist_id)
-	#list of items in wish list
-	wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
-	return render(request, 'WishListApp/user.html',{'user':user, 'kado_user':kado_user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
+		# return render(request, 'WishListApp/login.html')	
+		edit_item_form = EditItemForm()	
+		user = get_object_or_404(User, pk=user_id)
+		kado_user = KadoUser.objects.get(user=user)
+		# kado_user = get_object_or_404(KadoUser, user=user)
+		wishlist = get_object_or_404(WishList, pk=wishlist_id)
+		#list of items in wish list
+		wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
+		return render(request, 'WishListApp/user.html',{'edit_item_form': edit_item_form, 'user':user, 'kado_user':kado_user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
 	# return render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
+
+def submitEditItem(request, item_id):
+	item = get_object_or_404(WishListItem, pk=item_id)
+	wishlist = item.wish_list
+	user = wishlist.user
+	if request.method == 'POST':
+		edit_item_form = EditItemForm(data=request.POST, instance=item)
+		if edit_item_form.is_valid():
+			edit_item_form.save()
+			print("form saved")
+		return HttpResponseRedirect(reverse('WishListApp:user',args=(user.id,wishlist.id,)))
+	else :	
+		edit_item_form = EditItemForm()	
+		return HttpResponseRedirect(reverse('WishListApp:user',args=(user.id,wishlist.id,)))
+
+def deleteItem(request, item_id):
+	item = get_object_or_404(WishListItem, pk=item_id)
+	wishlist = item.wish_list
+	user = wishlist.user
+	if request.method == 'POST':
+		item.delete()
+		return HttpResponseRedirect(reverse('WishListApp:user',args=(user.id,wishlist.id,)))
+	else :	
+		return HttpResponseRedirect(reverse('WishListApp:user',args=(user.id,wishlist.id,)))
+
 
 def logout(request):
 	auth_logout(request)

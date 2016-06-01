@@ -16,7 +16,13 @@ $(document).ready(function(){
 
 	var open_modal = function(){
 		$(".modal").css("display", "block");
-		$(".item_id_input").val($(this).$("#item_id span").text());
+		// console.log($('.item_id').text());
+		// console.log($(this).siblings(".hi").text());
+		var item_id = $(this).next().text();
+		$("#form-edit-item").attr('action', "/submitedititem/" + item_id);
+
+		console.log($("#form-edit-item").attr('action'));
+		console.log(item_id);
 	}
 
 	var close_modal = function(){
@@ -28,6 +34,10 @@ $(document).ready(function(){
 
 	$(".button-edit").click(open_modal);
 	$(".button-x").click(close_modal);
+
+	var submit_form = function(){
+		alert("Item Updated");
+	}
 
 	// $(window).click(function(){})
 	// $(".button-remove").click();
