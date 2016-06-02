@@ -93,10 +93,13 @@
 				<!-- DON'T MOVE FOLLOWING LINE -->
 				<div class="item-id" style="display:none;">{{item.id}}</div>
 				{% endif %}
+				
 				<a href="{{item.url}}" target="_blank"> <img src="{{item.image}}" >
+				</a>
+
 				<span>{{ item.name }}</span>
 				<span>{{ item.descripton }}</span>
-				</a>
+				
 				<div class="wishlist-item-overlay"></div>
 			</div>
 		{% endfor %}

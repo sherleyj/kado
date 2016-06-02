@@ -38,14 +38,16 @@ class EditKadoUserForm(forms.ModelForm):
 		fields = ('dob', 'avatar')
 
 class addItemForm(forms.ModelForm):
+	descripton = forms.CharField(label='', widget=forms.Textarea(attrs={'placeholder': 'Description'}), required=False)
+	name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Item name'}), required=False)
 	class Meta:
 		model = WishListItem
 		exclude = ('name', 'wish_list', 'image', 'description', 'store')
 		fields = ('url',)
 
 class EditItemForm(forms.ModelForm):
-	name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Item name'}))
-	descripton = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Description'}))
+	name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Item name'}), required=False)
+	descripton = forms.CharField(label='', widget=forms.Textarea(attrs={'placeholder': 'Description'}), required=False)
 	class Meta:
 		model = WishListItem
 		exclude = ('url', 'wish_list', 'store', 'image',)
