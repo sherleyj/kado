@@ -45,11 +45,11 @@ class addItemForm(forms.ModelForm):
 
 class EditItemForm(forms.ModelForm):
 	name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Item name'}))
-	description = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Description'}))
+	descripton = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Description'}))
 	class Meta:
 		model = WishListItem
 		exclude = ('url', 'wish_list', 'store', 'image',)
-		fields = ('name', 'description')
+		fields = ('name', 'descripton',)
 
 
 
