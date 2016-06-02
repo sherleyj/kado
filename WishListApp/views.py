@@ -48,16 +48,19 @@ def user(request, user_id, wishlist_id, error_msg=""):
 	# return render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg})
 
 def submitEditItem(request, item_id):
+	print("in submit")
 	item = get_object_or_404(WishListItem, pk=item_id)
 	wishlist = item.wish_list
 	user = wishlist.user
 	if request.method == 'POST':
+		print("in if")
 		edit_item_form = EditItemForm(data=request.POST, instance=item)
 		if edit_item_form.is_valid():
 			edit_item_form.save()
 			print("form saved")
 		return HttpResponseRedirect(reverse('WishListApp:user',args=(user.id,wishlist.id,)))
 	else :	
+		print("in else")
 		edit_item_form = EditItemForm()	
 		return HttpResponseRedirect(reverse('WishListApp:user',args=(user.id,wishlist.id,)))
 
