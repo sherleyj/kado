@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from WishListApp.models import KadoUser, WishList, WishListItem
 from django.core.urlresolvers import reverse
-from WishListApp.scrape import amazon_images, gen_images, gen_title, get_soup
+from WishListApp.scrape import og_description, og_site_name, amazon_images, gen_images, gen_title, get_soup
 from WishListApp.forms import UserForm, KadoUserForm, EditUserForm, EditKadoUserForm, EditItemForm
 import json
 from django.contrib.auth.decorators import login_required
@@ -131,19 +131,24 @@ def editItem(request, user_id, wishlist_id):
 	url = ""
 	title = ""
 	images = []
+	store = ""
+	description = ""
 	try:
 		url = request.POST['url']
 		title = gen_title(url)
+		store = og_site_name(url)
+		description = og_description(url)
+		# print(store)
 		if "amazon" in url:
 			images = amazon_images(url)
 		else:
 			images = gen_images(url)
 		json_images = json.dumps(images)
-		return render(request, 'WishListApp/edit_item.html', {'user':user, 'wishlist':wishlist, 'item_url':url, 'current_user':request.user, 'title':title, 'images': images, 'json_images': json_images})
+		return render(request, 'WishListApp/edit_item.html', {'description': description, 'store':store,'user':user, 'wishlist':wishlist, 'item_url':url, 'current_user':request.user, 'title':title, 'images': images, 'json_images': json_images})
 	except Exception, e:
 		wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
 		error_msg = "Error: "
-		return render(request, 'WishListApp/user.html',{'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg + str(e)})
+		return render(request, 'WishListApp/user.html',{'description': description, 'store':store, 'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg + str(e)})
 		# return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
 	return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
 
@@ -156,12 +161,20 @@ def addItem(request, user_id, wishlist_id):
 	img_url = ""
 	description = ""
 	item_url = ""
+	store = ""
 	try:
 		title = request.POST['title']
 		img_url = request.POST['img_url']
 		description = request.POST['description']
 		item_url = request.POST['item_url']
-		new_wishlist_item = WishListItem.objects.create(name=title, url=item_url, image=img_url, wish_list=wishlist, descripton=description)
+		store = request.POST['store']
+		print(store)
+		if store is not None or store != "":
+			print("has og store")
+			new_wishlist_item = WishListItem.objects.create(name=title, url=item_url, image=img_url, wish_list=wishlist, product_description=description, store=store)
+		else:
+			print("no store")
+			new_wishlist_item = WishListItem.objects.create(name=title, url=item_url, image=img_url, wish_list=wishlist, product_description=description)
 		return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
 	except Exception, e:
 		error_msg = "Failed to add Item. Error: " 

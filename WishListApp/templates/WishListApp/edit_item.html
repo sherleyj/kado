@@ -65,9 +65,10 @@
 					<form action="{% url 'WishListApp:additem' user.id wishlist.id %}" method="post" id="add_item_form">
 						{% csrf_token %}
 						Item Title:
-						<input type="text" name="title" value="{{title}}"></input> 
+						<input type="text" name="title" value="{{title}}"></input>
+						<input type="text" name="store" value="{{store}}" style="display:none"></input> 
 						<br><br>
-						<input type="text" name="description" placeholder="Add a description"></input>
+						<textarea rows="5" cols="40" type="text" name="description">{{description}}</textarea>
 						<input type="text" name="img_url" value="" id="input_img_url" style="display:none"></input>
 						<input type="text" name="item_url" value="{{item_url}}" id="item_url" style="display:none"></input>
 						<br><br>

@@ -8,6 +8,8 @@ import boto
 from boto.s3.connection import S3Connection, Bucket, Key
 from django.conf import settings
 
+from django.core.validators import RegexValidator
+
 
 def upload_avatar_to(instance, filename):
     import os
@@ -30,6 +32,9 @@ class KadoUser(models.Model):
 	# named by MEDIA_ROOT, under a subdirectory named by the field's 
 	# upload_to value.
 	avatar = models.ImageField(blank=True, upload_to=upload_avatar_to)
+	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+	phone_number = models.CharField(validators=[phone_regex], blank=True, max_length=15) # validators should be a list
+
 
 	#Django's User contains username, password, email, first name, last name.
 
@@ -65,12 +70,15 @@ class WishListItem(models.Model):
 	name = models.CharField(max_length=100, blank=True)
 	url = models.URLField()
 	image = models.URLField()
-	descripton = models.CharField(max_length=500, blank=True)
+	product_description = models.CharField(max_length=500, blank=True)
 	store = models.CharField(max_length=100, blank=True)
-	# date_added = models.DateTimeField(auto_now_add=True)
-	# last_modified = models.DateTimeField(auto_now=True)
-	# received = models.BooleanField(default=False)
-	# purchased = models.BooleanField(default=False)
+	store_shortcut_icon = models.URLField(blank=True)
+	date_added = models.DateTimeField(auto_now_add=True)
+	last_modified = models.DateTimeField(auto_now=True)
+	received = models.BooleanField(default=False)
+	purchased = models.BooleanField(default=False)
+	quantity = models.CharField(blank=True, max_length=6)
+	user_comment = models.CharField(blank=True, max_length=500)
 
 	def __str__(self):
 		return self.name

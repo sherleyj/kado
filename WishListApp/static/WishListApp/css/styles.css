@@ -749,10 +749,20 @@
     opacity:0.5;
   }*/
 
-  .wishlist-item span {
-  	text-align: center;
-	/*vertical-align: middle;*/
-	
+  .item-store {
+  	padding-bottom: 5px;
+  	font-weight: 700;
+  	font-size: 13px;
+  	margin: 0;
+  	/*float: right;*/
+  	width: 100%;
+  	text-align: right;
+  }
+
+  .item-content {
+  	/*width: 100%;*/
+  	display: block;
+  	margin: 0;
   }
 
   .footer {
