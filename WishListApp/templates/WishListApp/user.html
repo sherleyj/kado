@@ -123,6 +123,7 @@
 					<div class="item-container">
 						<h3>Edit Item</h3>
 						<button class="button-icon button-x"></button>
+						<!-- actions is /submitedititem/ -->
 						<form id="form-edit-item" method="post" action="">
 							{% csrf_token %}
 							{{edit_item_form.as_p}}
