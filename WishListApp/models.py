@@ -72,7 +72,7 @@ class WishListItem(models.Model):
 	image = models.URLField()
 	product_description = models.CharField(max_length=500, blank=True)
 	store = models.CharField(max_length=100, blank=True)
-	store_shortcut_icon = models.URLField(blank=True)
+	store_shortcut_icon = models.URLField(blank=True) # favicon
 	date_added = models.DateTimeField(auto_now_add=True)
 	last_modified = models.DateTimeField(auto_now=True)
 	received = models.BooleanField(default=False)

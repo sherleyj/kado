@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from WishListApp.models import KadoUser, WishList, WishListItem
 from django.core.urlresolvers import reverse
-from WishListApp.scrape import og_description, og_site_name, amazon_images, gen_images, gen_title, get_soup
+from WishListApp.scrape import og_shortcut_icon, og_description, og_site_name, amazon_images, gen_images, gen_title, get_soup
 from WishListApp.forms import UserForm, KadoUserForm, EditUserForm, EditKadoUserForm, EditItemForm
 import json
 from django.contrib.auth.decorators import login_required
@@ -136,7 +136,6 @@ def editItem(request, user_id, wishlist_id):
 	try:
 		url = request.POST['url']
 		title = gen_title(url)
-		store = og_site_name(url)
 		product_description = og_description(url)
 		# print(store)
 		if "amazon" in url:
@@ -145,11 +144,11 @@ def editItem(request, user_id, wishlist_id):
 		else:
 			images = gen_images(url)
 		json_images = json.dumps(images)
-		return render(request, 'WishListApp/edit_item.html', {'product_description': product_description, 'store':store,'user':user, 'wishlist':wishlist, 'item_url':url, 'current_user':request.user, 'title':title, 'images': images, 'json_images': json_images})
+		return render(request, 'WishListApp/edit_item.html', {'product_description': product_description, 'user':user, 'wishlist':wishlist, 'item_url':url, 'current_user':request.user, 'title':title, 'images': images, 'json_images': json_images})
 	except Exception, e:
 		wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
 		error_msg = "Error: "
-		return render(request, 'WishListApp/user.html',{'product_description': product_description, 'store':store, 'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg + str(e)})
+		return render(request, 'WishListApp/user.html',{'product_description': product_description, 'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg + str(e)})
 		# return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
 	return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
 
@@ -163,19 +162,22 @@ def addItem(request, user_id, wishlist_id):
 	product_description = ""
 	item_url = ""
 	store = ""
+	store_shortcut_icon = ""
 	try:
 		title = request.POST['title']
 		img_url = request.POST['img_url']
 		product_description = request.POST['product_description']
 		item_url = request.POST['item_url']
-		store = request.POST['store']
+		store_shortcut_icon = og_shortcut_icon(item_url)
+		store = og_site_name(item_url)
+
 		print(store)
 		if store is not None or store != "":
 			print("has og store")
-			new_wishlist_item = WishListItem.objects.create(name=title, url=item_url, image=img_url, wish_list=wishlist, product_description=product_description, store=store)
+			new_wishlist_item = WishListItem.objects.create(name=title, url=item_url, image=img_url, wish_list=wishlist, product_description=product_description, store=store, store_shortcut_icon=store_shortcut_icon)
 		else:
 			print("no store")
-			new_wishlist_item = WishListItem.objects.create(name=title, url=item_url, image=img_url, wish_list=wishlist, product_description=product_description)
+			new_wishlist_item = WishListItem.objects.create(name=title, url=item_url, image=img_url, wish_list=wishlist, product_description=product_description, store_shortcut_icon=store_shortcut_icon)
 		return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
 	except Exception, e:
 		error_msg = "Failed to add Item. Error: " 

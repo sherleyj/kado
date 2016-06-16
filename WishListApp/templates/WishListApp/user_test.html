@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<!-- Kado font -->
+	<link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+
+<!-- 	<link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'> -->
+
+	<!-- <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,100,300,500,700,800,900' rel='stylesheet' type='text/css'> -->
+
+	<link href='https://fonts.googleapis.com/css?family=Karla:400,700' rel='stylesheet' type='text/css'>
+	<!-- <script type="text/javascript" src="{% static 'WishListApp/js/user.js' %}"> </script> -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+	<script type="text/javascript" src="{% static 'WishListApp/js/user.js' %}"> </script>
+
+<style>
+	html {
+		color:#1a1a1a;
+		font-family: 'Lato', sans-serif;
+		font-family: 'Alegreya Sans', sans-serif;
+		font-family: 'Karla', sans-serif;
+		font-weight: 300;
+		margin: 0;
+		padding: 0;
+		min-height: 100%;
+	}
+	body {
+		background-color: #F0F2F2;
+		margin: 0;
+		padding: 0;
+	}
+
+	.menu-container {
+		width: 100%;
+		margin-top: -4px;
+		position: fixed;
+		height: 45px;
+		z-index: 4;
+	}
+
+	.menu {
+		/* Width set by user.js */
+		height: 100%;
+		margin: 0 auto;
+	}
+
+	.menu-style {
+		position: absolute;
+    	width: 100%;
+    	height: 100%;
+    	background-color: rgba(251,252,252,.8);
+    	border-bottom: 1px solid #f8f8f8;
+	}
+
+	.user-search-bar {
+		/*padding-left: 40px;*/
+		float: right;
+		position: relative;
+		color: #f2f2f2;
+		padding-top: 10px;
+	}
+
+	.user-header-wrapper {
+		/*max-width: 90%;*/
+		width: 100%;
+		font-size: 20px;
+		padding-top: 50px;
+		margin: 0 auto;
+		/*height: 500px;*/
+		background-color: #FBFCFC;
+	}
+
+	.user-header {
+ 	 	padding: 50px 10px;
+ 	 	text-align: center;
+ 	 	margin: 0 auto;
+ 	 	width: 60%;
+	}
+
+	.user-header img {
+		max-height: 140px;
+		/*display: inline-block;*/
+		border-radius: 70px;
+		/*padding-right: 10px;*/
+		/*max-width: 100%;*/
+		display: block;
+		vertical-align: middle;
+		/*padding-right: 5px;*/
+		/*margin-top: -27px;*/
+		margin: 0 auto;
+	}
+
+/*	.default-img{
+		border-radius: 0px;
+		background-color: #000;
+	}*/
+
+	.user-header h1 {
+		/*position: relative;*/
+		display: inline-block;
+		text-align: center;
+		margin: 0;
+		padding-top: 10px;
+		font-size: 34px;
+		/*padding-left: 5px;*/
+		/*vertical-align: middle;*/
+		/*height: 100%;*/
+		/*max-width: 100%;*/
+		/*padding-left: 10px;*/
+	}
+
+	.user-buttons {
+		margin-top: 15px;
+	}
+
+	.button {
+	    font-size: 12px;
+	    text-decoration: none;
+	    /*margin-right: 45px;*/
+	    margin-top: -33px;
+	    border-radius: 4px;
+	    /*background-color: #00b300;*/
+	    background-color: #a6a6a6;
+	    padding: 5px 9px;
+	    border: none;
+	    color: #fff;
+	    text-indent: 0px;
+	}
+
+	.button-red {
+		background-color: #C0392B;
+		/*background-color: #CD704B;*/
+	}
+
+
+	.button-green {
+		background-color: #00b300;
+		/*background-color: #CD704B*/
+	}
+
+	.button-additem {
+		margin-top: 5px;
+	}
+
+	.button-icon {
+		position: absolute;
+/*		right: 15px;
+		top: 15px;*/
+		display: none;	
+		margin: 0;
+		padding: 13px 13px;
+		text-align: center;
+		/*height: 24px;*/
+		/*width: 24px;*/
+		border: 1px solid #C2C2C2
+	}
+
+	.button-icon:hover {
+		border-color: #757474;
+	}
+
+/*icon color #3289C7*/
+	.button-remove {
+		background: url("../images/icons/remove.png") no-repeat;
+		right: 50px;
+		top: 15px;
+		background-position: center;
+		background-color: #fff; 
+	}
+
+	.button-x {
+		display: inline-block;
+		background: url("../images/icons/x-icon.png") no-repeat;
+		right: 7px;
+		top: 7px;
+		background-position: center;
+		background-color: #fff; 
+	}
+
+	.button-edit {
+		background: url("../images/icons/pencil.png") no-repeat;
+		right: 15px;
+		top: 15px;
+		background-position: center;
+		background-color: #fff; 
+	}
+
+	.wishlist {
+		position: relative;
+		display: -webkit-inline-flex;
+		display: -ms-inline-flexbox;
+  		display: inline-flex;
+  		-webkit-flex-direction: row;
+  		flex-direction: row;
+ 		-webkit-flex-wrap: wrap;
+ 		flex-wrap: wrap;
+ 		-webkit-justify-content: center;
+ 	 	justify-content: center;
+ 	 	margin: 0px 20px; 	 	
+ 	 	/* makes it so all items in each 
+ 	 	row have individual heights */
+ 	 	/*-webkit-align-items: center;*/
+ 	 	/*align-items: center;*/
+  }
+
+  .wishlist-item {
+  	position: relative;
+  	width: 300px;
+  	margin: 5px;
+   	border-radius: 2px;
+   	padding: 10px;
+   	background-color: #FBFCFC;
+   	box-shadow: 0 1px 2px 0 rgba(100,100,100,0.22);
+  }
+
+
+  .wishlist-item:hover button {
+  	display: inline;
+  	z-index: 99;
+  }
+
+  .wishlist-item:hover img {
+    background-color:#000;
+    opacity:0.5;
+  }
+
+  .wishlist-item-empty{
+  	width: 300px;
+  	height: 0px;
+  	margin: 5px;
+  	padding: 10px;
+  }
+
+  .wishlist-add-item-container {
+  	padding: 10px;
+  	margin: 5px;
+  	width: 200px;
+  	border-radius: 2px;	
+  	background-color: #FBFCFC;
+  	/*height: 300px;*/
+  	box-shadow: 0 1px 2px 0 rgba(100,100,100,0.22);
+  	background-image: url("../images/p4/p4.png");
+  	min-height: 225px;
+  }
+
+  .wishlist-add-item {
+  	padding: 10px;
+  	width: 154px;
+  	margin: 0 auto;
+  }
+
+  .wishlist-add-item form {
+  	max-width: 100px;
+  	/*margin: 0 auto;*/
+  }
+
+  .wishlist-add-item h3 {
+  	/*text-align: center;*/
+  }
+
+  .wishlist-item a {
+  	text-decoration: none;
+  	color: #000;
+  	display: block;
+  }
+
+  .wishlist-item img {
+  	max-width: 150px;
+  	box-shadow: 1px 1px 2px #f2f2f2;
+  	display: block;
+  }
+
+/*  .wishlist-item img:hover {
+  	width:100%;
+    height:100%;
+    background-color:#000;
+    opacity:0.5;
+  }*/
+
+  .item-store {
+  	padding-bottom: 5px;
+  	font-weight: 700;
+  	font-size: 13px;
+  	margin: 0;
+  	/*float: right;*/
+  	width: 100%;
+  	text-align: right;
+  }
+
+  .item-content {
+  	/*width: 100%;*/
+  	display: block;
+  	margin: 0;
+  }
+
+  input[name="user-search"] {
+		font-size: 15px;
+	  	border: none;
+	  	transition: border 0.3s;
+	  	width:250px;
+	  	height: 25px;
+	  	color:#a6a6a6;
+	  	border-radius: 3px;
+	  	padding-left: 5px;
+	}
+
+	input[name="user-search"]:focus {
+		outline:none;
+  		border: none;
+	}
+
+	input[name="url"] {
+		font-size: 15px;
+	  	border-style: solid;
+	  	border-color: #C1BFBF;
+	  	border-width: 1px;
+	  	transition: border 0.3s;
+	  	width:150px;
+	  	height: 25px;
+	  	color:#a6a6a6;
+	  	border-radius: 3px;
+	  	padding-left: 5px;
+	}
+
+	input[name="url"]:focus {
+		outline:none;
+	  	border-color: #C1BFBF;
+	}
+
+	.home-logo {
+		float: left;
+		position: relative;
+		padding-top: 5px;
+		/*padding-right: 40px;*/
+		letter-spacing: 4px;
+	}
+
+	.home-logo a {
+		font-family: 'Megrim', cursive;
+		text-decoration: none;
+		color: #0C090A;
+		font-size: 35px;
+	}
+
+	.item-table-content {
+		padding-left: 15px;
+		width: 100%;
+	}
+
+	.item-name {
+		font-size: 20px;
+	}
+
+
+</style>
+
+</head>
+<body>
+
+	<div class="menu-container">
+		<div class="menu-style"></div>
+		<div class="menu">
+			<div class="user-search-bar">
+				<form method="post" action="{% url 'WishListApp:finduser' user.id wishlist.id %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				<span style="color:red">{{error_msg}}</span>
+				<input type="text" name="user-search" 
+				value="Search users by email" 
+				onfocus="this.value=''" 
+				onblur="this.value= 'Search users by email' ">
+				<!-- style="visibility: hidden;" -->
+				<button type="submit" class="button button-green">Go</button>
+				</form>
+			</div>
+			<div class="home-logo">
+				<a href="{% url 'WishListApp:index' %}">KADO</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- </div> -->
+
+	<!-- <div class="user-header-wrapper"> -->
+		<div class="user-header-wrapper">
+			<div class="user-header">
+				{% if kado_user.avatar %} 
+				<img src="{{kado_user.avatar.url}}">
+				{% else %}
+				<img src="{% static 'WishListApp/images/photo-camera.png' %}"> 
+				{% endif %}
+				<h1>{{user.first_name}} {{user.last_name}}</h1>
+				{% if current_user == user %}
+				<div class="user-buttons">
+					<a class="button" href="{% url 'WishListApp:editinfo' user.id wishlist.id %}">Edit Profile</a>
+					
+					<a class="button button-red" href="{% url 'WishListApp:logout' %}">Log out</a>
+					
+				{% endif %}
+				</div>
+			</div>
+		</div>
+	<br>
+
+		<div class="wishlist">
+
+		{% for item in wishlist_items reversed%}
+			<div class="wishlist-item">
+				<table border="0">
+				{% if current_user == user %}
+				<form method="post" action="{% url 'WishListApp:deleteitem' item.id %}">
+					{% csrf_token %}
+					<button class="button-icon button-remove"></button>
+				</form>
+					<tr>
+						<td>
+						<button class="button-icon button-edit"></button>
+						<!-- DON'T MOVE FOLLOWING LINE -->
+						<div class="item-id" style="display:none;">{{item.id}}</div>
+						{% endif %}
+						<a href="{{item.url}}" target="_blank"> <img src="{{item.image}}" >
+						</a>
+						<div class="item-store item-content">{{ item.store }}</div>
+						</td>
+						<td class="item-table-content">
+						<div class="item-content item-name">{{ item.name }}</div>
+						<div class="item-content">{{ item.product_description }}</div>
+						</td>
+					</tr>
+				</table>
+				<div class="wishlist-item-overlay"></div>
+			</div>
+		{% endfor %}
+		<div class="wishlist-item-empty"></div>
+		<div class="wishlist-item-empty"></div>
+		<div class="wishlist-item-empty"></div>
+		<div class="wishlist-item-empty"></div>
+		<div class="wishlist-item-empty"></div>
+		<div class="wishlist-item-empty"></div>
+		
+		</div>
+	</div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+

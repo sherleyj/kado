@@ -89,18 +89,19 @@
 					{% csrf_token %}
 					<button class="button-icon button-remove"></button>
 				</form>
-				<button class="button-icon button-edit"></button>
-				<!-- DON'T MOVE FOLLOWING LINE -->
-				<div class="item-id" style="display:none;">{{item.id}}</div>
-				{% endif %}
-				
-				<a href="{{item.url}}" target="_blank"> <img src="{{item.image}}" >
-				</a>
-				<div class="item-store item-content">{{ item.store }}</div>
-				
-				<div class="item-content">{{ item.name }}</div>
-				<div class="item-content">{{ item.product_description }}</div>
-				
+						<button class="button-icon button-edit"></button>
+						<!-- DON'T MOVE FOLLOWING LINE -->
+						<div class="item-id" style="display:none;">{{item.id}}</div>
+						{% endif %}
+						<a href="{{item.url}}" target="_blank"> <img src="{{item.image}}" class="wishlist-item-img"></a>
+						<div class="item-store item-content">
+						{% if item.store_shortcut_icon %}
+							<img src="{{item.store_shortcut_icon}}" style="display:inline; width:15px;">
+						{% endif %}
+						<span>{{ item.store }}</span>
+						</div>
+						<div class="item-content">{{ item.name }}</div>
+						<div class="item-content">{{ item.product_description }}</div>
 				<div class="wishlist-item-overlay"></div>
 			</div>
 		{% endfor %}

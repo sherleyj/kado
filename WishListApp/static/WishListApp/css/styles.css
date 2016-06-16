@@ -689,7 +689,7 @@
   	z-index: 99;
   }
 
-  .wishlist-item:hover img {
+  .wishlist-item-img:hover{
   	width:100%;
     height:100%;
     background-color:#000;
@@ -736,7 +736,7 @@
   	display: block;
   }
 
-  .wishlist-item img {
+  .wishlist-item-img {
   	max-width: 100%;
   	box-shadow: 1px 1px 2px #f2f2f2;
   	display: block;
@@ -752,7 +752,7 @@
   .item-store {
   	padding-bottom: 5px;
   	font-weight: 700;
-  	font-size: 13px;
+  	font-size: 10px;
   	margin: 0;
   	/*float: right;*/
   	width: 100%;

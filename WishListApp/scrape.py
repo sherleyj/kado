@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import urllib2
+from urlparse import urlparse
 
 def get_soup(url):
 	try:
@@ -106,10 +107,30 @@ def og_description(url):
 
 	return "";
 
+def og_shortcut_icon(url):
+	hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11','Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8','Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3','Accept-Encoding': 'none','Accept-Language': 'en-US,en;q=0.8','Connection': 'keep-alive',}
+	request = urllib2.Request(url, headers=hdr)
+	page = urllib2.urlopen(request)
+	soup = BeautifulSoup(page.read(), "html.parser")
+	page.close()
 
+	og_shortcut_icon = soup.find('link', rel="icon") 
+	purl = urlparse(url)
+	domain = purl.netloc
+	favicon_addr = ""
 
-
-
+	if og_shortcut_icon:
+		favicon_addr = og_shortcut_icon['href']
+		if domain in favicon_addr:
+			favicon_addr = favicon_addr
+		else:
+			favicon_addr = domain + favicon_addr
+	# elif "amazon" in domain:
+	# 	return "http://www.amazon.com/favicon.ico"
+	else:
+		favicon_addr = domain + "/favicon.ico"
+	print(favicon_addr)
+	return "//" + favicon_addr
 
 
 
