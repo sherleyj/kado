@@ -59,7 +59,7 @@ class KadoUser(models.Model):
 
 class WishList(models.Model):
 	user = models.ForeignKey(User)
-	name = models.CharField(max_length=200, blank=True)
+	name = models.CharField(max_length=2000, blank=True)
 	# email, mailing address, phone number,
 
 	def __str__(self):
@@ -77,7 +77,7 @@ class WishListItem(models.Model):
 	last_modified = models.DateTimeField(auto_now=True)
 	received = models.BooleanField(default=False)
 	purchased = models.BooleanField(default=False)
-	quantity = models.CharField(blank=True, max_length=6)
+	quantity = models.CharField(blank=True, max_length=1000)
 	user_comment = models.CharField(blank=True, max_length=500)
 
 	def __str__(self):
