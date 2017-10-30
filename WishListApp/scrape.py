@@ -47,7 +47,7 @@ def gen_images(url):
 	page.close()
 	images = []
 	skip_these = ['.gif', 'icon', 'facebook', 'instagram', 'twitter', 'tumbler', 'pinterest',]
-
+	
 	og_image = soup.find('meta', property="og:image")
 	if og_image:
 		images.append(og_image['content'].encode('utf-8'))
@@ -61,10 +61,14 @@ def gen_images(url):
 				images.append(tag['src'].encode('utf-8'))
 		elif tag.has_attr('height'):
 			if tag['height'].encode('utf-8') > 100:
-				images.append(tag['src'].encode['utf-8'])
+				images.append(tag['src'].encode('utf-8'))
 		else:
 			images.append(tag['src'].encode('utf-8'))
 
+	if not images:
+		for tag in soup.find_all('img', {"src":True}):
+			images.append(tag['src'].encode('utf-8'))
+	
 	return images;
 
 def gen_title(url):

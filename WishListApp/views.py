@@ -124,7 +124,7 @@ def wishList(request, user_id, wishlist_id):
 	wishlist_items = WishListItem.objects.filter(wish_list=wish_list)
 	return render(request, 'WishListApp/wishlist.html', {'user':user, 'wishlist':wish_list, 'wishlist_items':wishlist_items})
 
-def editItem(request, user_id, wishlist_id):
+def editItemNew(request, user_id, wishlist_id):
 	user = get_object_or_404(User, pk=user_id)
 	wishlist = get_object_or_404(WishList, pk=wishlist_id)
 	url = ""
@@ -135,18 +135,22 @@ def editItem(request, user_id, wishlist_id):
 	try:
 		url = request.POST['url']
 		title = gen_title(url)
+		print "Title: " + str(title)
 		product_description = og_description(url)
-		# print(store)
+		print "Product Description: " + str(product_description)
 		if "amazon" in url:
 			images = gen_images(url)
 			store = "Amazon"
+			print "Images-Amazon: " + str(images)
 		else:
 			images = gen_images(url)
+		print str(images)
 		json_images = json.dumps(images)
-		return render(request, 'WishListApp/edit_item.html', {'product_description': product_description, 'user':user, 'wishlist':wishlist, 'item_url':url, 'current_user':request.user, 'title':title, 'images': images, 'json_images': json_images})
+		return render(request, 'WishListApp/edit_item_new.html', {'product_description': product_description, 'user':user, 'wishlist':wishlist, 'item_url':url, 'current_user':request.user, 'title':title, 'images': images, 'json_images': json_images})
 	except Exception, e:
 		wishlist_items = WishListItem.objects.filter(wish_list=wishlist)
-		error_msg = "Error: "
+		error_msg = "Error: " + str(e)
+		print error_msg
 		return render(request, 'WishListApp/user.html',{'product_description': product_description, 'user':user, 'wishlist_items':wishlist_items, 'current_user':request.user, 'wishlist':wishlist, 'error_msg': error_msg + str(e)})
 		# return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
 	return HttpResponseRedirect(reverse('WishListApp:user', args=(user_id, wishlist.id)))
