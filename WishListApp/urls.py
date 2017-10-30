@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^user/(?P<user_id>[0-9]+)/(?P<wishlist_id>[0-9]+)/(?P<item_id>[0-9]+)/edit_item/$', views.editItem, name="edititemuser"),
     url(r'^submitedititem/(?P<item_id>[0-9]+)/$', views.submitEditItem, name="submitedititem"),
     url(r'^deleteitem/(?P<item_id>[0-9]+)/$', views.deleteItem, name="deleteitem"),
+    url(r'^search/', views.search, name='search'),
 
 ]

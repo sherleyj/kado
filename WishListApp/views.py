@@ -10,18 +10,17 @@ from WishListApp.forms import UserForm, KadoUserForm, EditUserForm, EditKadoUser
 import json
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
 def index(request, error_msg=""):
 	# return HttpResponse("Hello, world.  You're at the WishListApp index.")
-	if request.method == 'POST':
-		try:
-			user = User.objects.get(email=request.POST.get('email'))
-			wishlist = WishList.objects.get(user=user, name='public-' + str(user.id))
-			return HttpResponseRedirect(reverse('WishListApp:user', args=(user.id, wishlist.id,)))
-		except User.DoesNotExist:
-			error_msg = "User not found."
-			return render(request, 'WishListApp/index.html', {'error_msg': error_msg})
-	else:
+	# if request.method == 'POST':
+	# 	try:
+	# 		user = User.objects.get(email=request.POST.get('email'))
+	# 		wishlist = WishList.objects.get(user=user, name='public-' + str(user.id))
+	# 		return HttpResponseRedirect(reverse('WishListApp:user', args=(user.id, wishlist.id,)))
+	# 	except User.DoesNotExist:
+	# 		error_msg = "User not found."
+	# 		return render(request, 'WishListApp/index.html', {'error_msg': error_msg})
+	# else:
 		return render(request, 'WishListApp/index.html')
 
 def about(request):
@@ -321,6 +320,17 @@ def findUser(request, user_id, wishlist_id):
 	else:
 		return HttpResponse("Could not find user.")
 
+def search(request):
+	if request.method == 'POST':
+		try:
+			user = User.objects.get(email=request.POST.get('email'))
+			wishlist = WishList.objects.get(user=user, name='public-' + str(user.id))
+			return HttpResponseRedirect(reverse('WishListApp:user', args=(user.id, wishlist.id,)))
+		except User.DoesNotExist:
+			error_msg = "User not found."
+			return render(request, 'WishListApp/index.html', {'error_msg': error_msg})
+	else:
+		return render(request, 'WishListApp/search.html')
 
 
 

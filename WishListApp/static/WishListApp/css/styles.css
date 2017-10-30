@@ -123,13 +123,13 @@
 	/* Links inside the dropdown */
 	.dropdown-content a {
 		background-color: #f2f2f2;
-	  color: black;
-	  padding: 9px 10px;
-	  /*margin-top:5px;*/
-	  /*padding-top: 12px;
-	  padding-right: 16px;*/
-	  text-decoration: none;
-	  display: block;
+		color: black;
+		padding: 9px 10px;
+		/*margin-top:5px;*/
+		/*padding-top: 12px;
+		padding-right: 16px;*/
+		text-decoration: none;
+		display: block;
 	}
 
 	/* Change color of dropdown links on hover */
@@ -155,21 +155,29 @@
 	}
 
 	.title-wrapper {
+		display: table;
 		width: 100%;
-		position: relative;
+		/*position: relative;*/
+  		height: 100%; /* For at least Firefox */
+  		min-height: 100%;
 	}
 
 
 	.title-overlay {
+		/*display: table-cell;*/
 		position: absolute;
 		background-color: rgba(22,22,22,.7);
 		opacity: .65;
 		height: 100%;
 		width:100%;
 		top:0;
+		-webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
 	}
 
 	.title {
+		display: table-cell;
+		vertical-align: top;
 		background-color: #1a1a1a;
 		background-image: url("../images/wedding.jpeg");
 		background-size: cover;
@@ -369,7 +377,7 @@
 
 	.kado-A {
 		font-family: 'Megrim', cursive;
-		font-size: 1.5em;
+		font-size: 3.5em;
 		display: inline;
 		padding: 0px 10px;
 		color: #7E354D;

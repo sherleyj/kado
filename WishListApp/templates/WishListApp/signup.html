@@ -1,40 +1,81 @@
 <!DOCTYPE html>
 {% load static %}
-<html>
-<head>
-	<link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-	<!-- <link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'> -->
-	
-	<link href='https://fonts.googleapis.com/css?family=Karla:400,700' rel='stylesheet' type='text/css'>
+    <title>Kado: Log in</title>
 
-	<link href="{% static 'WishListApp/css/signup.css' %}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+
+   <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- rename file to login and change that here -->
+    <link href="{% static 'WishListApp/css/index.css' %}" rel="stylesheet">
+    <link href="{% static 'WishListApp/css/signin.css' %}" rel="stylesheet">
+    <link href="{% static 'WishListApp/css/signup.css' %}" rel="stylesheet">
 
 
-	<style>
+  </head>
 
-	</style>
-</head>
-<body>
-<!-- 	<div class="signup-header">
-		<div class="signup-header-title"> <a href="{% url 'WishListApp:index' %}">KADO</a></div> 
-	</div> -->
+  <body>
 
-	<div class="signup-form-container">
-		<div class="signup-form">
-		<span class="signup-title">Join Kado today.</span>
-		<form class="signup-form" id="user_form" method="post" action="{% url 'WishListApp:signup' %}"enctype="multipart/form-data">
-			{% csrf_token %}
-			<!-- Display each form. The as_p method wraps each element in a paragraph (<p>) element. This ensures each element appears on a new line, making everything look neater. -->
-			{{ user_form.as_p }}
-				<input class="register-button" type="submit" name="submit" value="Continue" />
-		</form>
-		</div>
-	</div>
+    <div class="site-wrapper">
+<!-- <div class="title-overlay"></div> -->
+      <div class="site-wrapper-inner">
 
-	<div class="login-here">
-	Already have an account? <a href="{% url 'WishListApp:login' %}">Log in</a>
-	</div>
-</body>
+        <div class="cover-container">
 
+     <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand"><a href="{% url 'WishListApp:index' %}">KADO</a></h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li><a href="{% url 'WishListApp:index' %}">Home</a></li>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Search</a></li>
+                  <li class="active"><a href="{% url 'WishListApp:login' %}">Log In</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+<div class="inner cover">
+      <form action="{% url 'WishListApp:signup' %}" method="post" class="form-signin" id="user_form">
+        <h2 class="form-signin-heading">Join Kado today.</h2>
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        <!-- <input class="register-button" type="submit" name="submit" value="Continue" /> -->
+        <div class="checkbox">
+            Already have an account? <a href="{% url 'WishListApp:login' %}">Log In</a>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Sign Up</button>
+      </form>
+      {{error_message}}
+      </div>
+         </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Latest compiled and minified JavaScript -->
+
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
 </html>

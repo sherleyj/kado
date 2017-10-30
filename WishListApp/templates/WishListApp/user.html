@@ -15,9 +15,6 @@
 
 	<!-- <script type="text/javascript" src="{% static 'WishListApp/js/user.js' %}"> </script> -->
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-
-	<script type="text/javascript" src="{% static 'WishListApp/js/user.js' %}"> </script>
 
 </head>
 <body>
@@ -26,16 +23,7 @@
 		<div class="menu-style"></div>
 		<div class="menu">
 			<div class="user-search-bar">
-				<form method="post" action="{% url 'WishListApp:finduser' user.id wishlist.id %}" enctype="multipart/form-data">
-				{% csrf_token %}
-				<span style="color:red">{{error_msg}}</span>
-				<input type="text" name="user-search" 
-				value="Search users by email" 
-				onfocus="this.value=''" 
-				onblur="this.value= 'Search users by email' ">
-				<!-- style="visibility: hidden;" -->
-				<button type="submit" class="button button-green">Go</button>
-				</form>
+
 			</div>
 			<div class="home-logo">
 				<a href="{% url 'WishListApp:index' %}">KADO</a>
@@ -151,6 +139,10 @@
 <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
 </div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+	<script type="text/javascript" src="{% static 'WishListApp/js/user.js' %}"> </script>
 
 </body>
 
