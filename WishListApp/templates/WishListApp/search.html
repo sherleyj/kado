@@ -44,42 +44,16 @@
               </nav>
             </div>
           </div>
-<div class="inner cover">
-      <form action="{% url 'WishListApp:search' %}" method="post" class="form-search-user">
-        <h2 class="form-signin-heading">Search for a user's registry by name, username, or email address</h2>
-        {% csrf_token %}
-        
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
-              </span>
-            </div><!-- /input-group -->
-          </div><!-- /.col-lg-6 -->
-        </div><!-- /.row -->
-
+      <div class="inner cover">
+      <form action="{% url 'WishListApp:searchUserByEmail' %}" method="post" class="form-search-user">
+      {% csrf_token %} 
+        <input type="text" name="email" class="form-control" placeholder="Search by email...">
+        <button class="btn btn-default" type="submit">Go!</button>
       </form>
-      {{error_message}}
+      <p> {{error_msg}} </p> 
       </div>
          </div>
 
       </div>
 
     </div>
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <!-- Latest compiled and minified JavaScript -->
-
-    <script
-    src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  </body>
-</html>

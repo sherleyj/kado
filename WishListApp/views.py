@@ -141,10 +141,9 @@ def editItemNew(request, user_id, wishlist_id):
 		if "amazon" in url:
 			images = gen_images(url)
 			store = "Amazon"
-			print "Images-Amazon: " + str(images)
 		else:
 			images = gen_images(url)
-		print str(images)
+		# print str(images)
 		json_images = json.dumps(images)
 		return render(request, 'WishListApp/edit_item_new.html', {'product_description': product_description, 'user':user, 'wishlist':wishlist, 'item_url':url, 'current_user':request.user, 'title':title, 'images': images, 'json_images': json_images})
 	except Exception, e:
@@ -313,6 +312,7 @@ def edit_item(request, user_id, wishlist_id, item_id):
 	updatedInfo = False
 
 def findUser(request, user_id, wishlist_id):
+
 	if request.method == 'POST':
 		try:
 			user = User.objects.get(email=request.POST.get('email'))
@@ -324,19 +324,51 @@ def findUser(request, user_id, wishlist_id):
 	else:
 		return HttpResponse("Could not find user.")
 
-def search(request):
+def search (request):
+	return render(request, 'WishListApp/search.html')
+
+def searchUserByEmail(request, user_id=None, wishlist_id=None):
 	if request.method == 'POST':
 		try:
-			user = User.objects.get(email=request.POST.get('email'))
-			wishlist = WishList.objects.get(user=user, name='public-' + str(user.id))
-			return HttpResponseRedirect(reverse('WishListApp:user', args=(user.id, wishlist.id,)))
+			users = User.objects.get(email=request.POST.get('email'))
+			print str(request.POST.get('email'))
+			print str(users)
+			wishlist = WishList.objects.get(user=users, name='public-' + str(users.id))
+			return HttpResponseRedirect(reverse('WishListApp:user', args=(users.id, wishlist.id,)))
+			# return render(request, 'WishListApp/search.html')
 		except User.DoesNotExist:
 			error_msg = "User not found."
-			return render(request, 'WishListApp/index.html', {'error_msg': error_msg})
+			return render(request, 'WishListApp/search.html', {'error_msg': error_msg})
 	else:
 		return render(request, 'WishListApp/search.html')
 
 
+def searchUserByUsername(request, user_id=None, wishlist_id=None):
+	if request.method == 'POST':
+		try:
+			user = User.objects.get(username=request.POST.get('username'))
+			wishlist = WishList.objects.get(user=user, name='public-' + str(user.id))
+			return HttpResponseRedirect(reverse('WishListApp:user', args=(user.id, wishlist.id,)))
+		except User.DoesNotExist:
+			error_msg = "User not found."
+			return render(request, 'WishListApp/search.html', {'error_msg': error_msg})
+	else:
+		return render(request, 'WishListApp/search.html')
+
+def userSearchResults(request, users, user_id=None, wishlist_id=None):
+	return render(request, 'WishListApp/search-results.html')
 
 
-
+# def searchUserByName(request, user_id, wishlist_id):
+# 	first_name = request.POST.get('first-name')
+# 	last_name = request.POST.get('last-name')
+# 	if request.method == 'POST':
+# 		try:
+# 			users = User.objects.filter(first_name=request.POST.get('first-name') and last_name=request.POST.get('last-name'))
+# 			wishlist = WishList.objects.get(user=user, name='public-' + str(user.id))
+# 			return HttpResponseRedirect(reverse('WishListApp:user', args=(user.id, wishlist.id,)))
+# 		except User.DoesNotExist:
+# 			error_msg = "User not found."
+# 			return render(request, 'WishListApp/index.html', {'error_msg': error_msg})
+# 	else:
+# 		return render(request, 'WishListApp/search.html')

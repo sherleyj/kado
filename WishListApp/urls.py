@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^submitedititem/(?P<item_id>[0-9]+)/$', views.submitEditItem, name="submitedititem"),
     url(r'^deleteitem/(?P<item_id>[0-9]+)/$', views.deleteItem, name="deleteitem"),
     url(r'^search/', views.search, name='search'),
-
+    url(r'^usersearch-email/', views.searchUserByEmail, name='searchUserByEmail'),
 ]

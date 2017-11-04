@@ -50,8 +50,8 @@ def gen_images(url):
 	
 	og_image = soup.find('meta', property="og:image")
 	if og_image:
+		print "had og_image"
 		images.append(og_image['content'].encode('utf-8'))
-		return images
 
 	for tag in soup.find_all('img', {"src":True}):
 		if any(word in tag['src'].lower() for word in skip_these):
@@ -68,7 +68,8 @@ def gen_images(url):
 	if not images:
 		for tag in soup.find_all('img', {"src":True}):
 			images.append(tag['src'].encode('utf-8'))
-	
+			print str(soup)
+
 	return images;
 
 def gen_title(url):
